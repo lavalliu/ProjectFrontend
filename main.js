@@ -11,12 +11,15 @@ app.set('view engine', 'ejs');
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'ejs');
 
+const path = require('path');
+app.set('views', path.join(__dirname, 'views'));
+
 //index page
 app.get('/', (req,res) => {
     res.render('index.ejs');
 });
 
-const port=3001;
-app.listen(port, () => {
-    console.log(`server listening on ${port}`);
+const port = 3001;
+app.listen(port, '0.0.0.0', () => {
+console.log(`server listening on ${port}`);
 });
