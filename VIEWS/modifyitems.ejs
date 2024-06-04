@@ -90,7 +90,7 @@
             }
 
             // Fetch and display menu items
-            fetch('http://localhost:3000/items')
+            fetch('https://projectbackend-fndm.onrender.com/items')
             .then(response => response.json())
             .then(data => {
                         const menuItems = data.items;
@@ -123,7 +123,7 @@
                         };
                   });
 
-                  fetch('http://localhost:3000/items/updateItems', { 
+                  fetch('https://projectbackend-fndm.onrender.com/items/updateItems', { 
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'
