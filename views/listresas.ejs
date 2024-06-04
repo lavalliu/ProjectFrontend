@@ -1,0 +1,241 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Project</title>
+
+    <!-- LINK TO BOOTSTRAP  AND STYLESHEET -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    <link href="../PUBLIC/style.css" rel="stylesheet">
+
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-sm navbar-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">ROYAL RESTAURANT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="starters.html">Starter</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="maincourse.html">Main Course</a>
+              </li>			
+              <li class="nav-item">
+                <a class="nav-link" href="desserts.html">Desserts</a>
+              </li>	
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Beverage
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li><a class="dropdown-item" href="soft.html">Soft</a></li>
+                  <li><a class="dropdown-item" href="cocktails.html">Cocktails</a></li>
+                  <li><a class="dropdown-item" href="aperitifs.html">Aperitifs</a></li>
+                  <li><a class="dropdown-item" href="hot.html">Hot Beverage</a></li>
+                  <li><a class="dropdown-item" href="wine.html">Wine</a></li>
+                </ul>
+              </li>
+              </ul>		
+            </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item" id="cartIcon">
+                  <a href="order.html" class="nav-link" id="myorder"></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"><span id="usernameDisplay"></span></a>
+                </li>			
+                <li class="nav-item">
+                  <a class="nav-link" id="logout" href="index.html">Logout</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="about.html">About</a>
+                </li>			
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>	
+              </ul>
+            </div>
+         </div>
+        </nav>
+</head>
+<body>
+  <div class="footer">
+    <p>L.Liu @2023</p>
+  </div>
+  <section class="about" id="about">
+    <div class="title">
+      <br><br><br>
+      <h1 class="text-center">List of Reservations</h1>
+      <br>
+      <div class="filter-container">
+        <form id="filterForm">
+          <label for="fromDateFilter">From:</label>
+          <input type="date" id="fromDateFilter" name="fromDateFilter">
+          <label for="toDateFilter">To:</label>
+          <input type="date" id="toDateFilter" name="toDateFilter">
+          <label for="takeoutFilter">Takeout:</label>
+          <input type="checkbox" id="takeoutFilter" name="takeoutFilter">
+          <button class="btn" type="submit">Display</button>
+        </form>
+        </div>
+      <div class="list-container">
+            <table id="resasTable" class="resas">
+              <thead>
+                <tr>
+                  <th scope="col">Username</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Pax</th>
+                  <th scope="col">Other</th>
+                  <th scope="col">Takeout</th>
+                  <th scope="col">Order Total</th>
+                </tr>
+              </thead>
+              <tbody>
+              <!-- Orders will be inserted here -->
+              </tbody>
+            </table>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </section>
+  <script src="../PUBLIC/commonscript.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+          displayAllResas();
+
+          const filterForm = document.getElementById('filterForm');
+          filterForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const fromDate = document.getElementById('fromDateFilter').value;
+                const toDate = document.getElementById('toDateFilter').value;
+                const takeoutFilter = document.getElementById('takeoutFilter').checked;
+
+                // Clear the current reservations display
+                const resasTableBody = document.querySelector('#resasTable tbody');
+                resasTableBody.innerHTML = '';
+
+                // Display reservations with the selected filters
+                displayAllResas(fromDate, toDate, takeoutFilter);
+          });
+    });
+
+
+    // async function displayAllResas() {
+      async function displayAllResas(fromDate = null, toDate = null, takeoutFilter = null) {
+          const resasTableBody = document.querySelector('#resasTable tbody');
+          if (!resasTableBody) {
+                console.error('The table body element was not found.');
+                return;
+          }
+          try {
+                const response = await fetch('http://localhost:3000/reservations');
+                const data = await response.json();
+                const reservationsArray = data.resas;
+
+        // Filter the reservations based on the provided filters
+        let filteredReservations = reservationsArray;
+        if (fromDate && toDate) {
+              const from = new Date(fromDate);
+              const to = new Date(toDate);
+              filteredReservations = filteredReservations.filter(resas => {
+                    const resasDate = new Date(resas.date);
+                    return resasDate >= from && resasDate <= to;
+              });
+        }
+        if (takeoutFilter !== null) {
+              filteredReservations = filteredReservations.filter(resas => resas.takeout === takeoutFilter);
+        }
+                // Sort the reservations by date
+                filteredReservations.sort((a, b) => new Date(a.date) - new Date(b.date));
+                      if (filteredReservations && filteredReservations.length > 0) { 
+                      let total = 0;
+                      for (const resas of filteredReservations) {
+                            const reservationTotal = resas.orders.reduce((sum, order) => sum + (order.quantity * order.price), 0);
+                            total += reservationTotal; 
+                            const formattedDate = new Date(resas.date).toLocaleDateString('en-UK');
+                            // Create a row for reservation details
+                            const resasRow = document.createElement('tr');
+                            resasRow.innerHTML = `
+                            <td>${resas.username}</td>
+                            <td>${formattedDate}</td>
+                            <td>${resas.time}</td>
+                            <td>${resas.fname} ${resas.lname}</td>
+                            <td>${resas.email}</td>
+                            <td>${resas.phoneno}</td>
+                            <td>${resas.pax}</td>
+                            <td>${resas.other}</td>
+                            <td>${resas.takeout ? 'Yes' : 'No'}</td>
+                            <td>Rs${reservationTotal.toFixed(2)}</td>
+                            `;
+                            resasTableBody.appendChild(resasRow);
+
+                            // Create a row for orders if there are any
+                            if (resas.orders.length > 0) {
+                                  const ordersRow = document.createElement('tr');
+                                  const ordersCell = document.createElement('td');
+                                  ordersCell.colSpan = 9; // Span across all columns
+                                  const ordersTable = document.createElement('table');
+                                  ordersTable.classList.add('orders-table');
+
+                                  // Create the header row for orders
+                                  const headerRow = ordersTable.insertRow();
+                                  const headers = ['Menu name', 'Quantity', 'Price Each', 'Line Total'];
+                                  headers.forEach(headerText => {
+                                        let headerCell = document.createElement('th');
+                                        headerCell.textContent = headerText;
+                                        headerRow.appendChild(headerCell);
+                                  });
+
+                                  // Add orders to the orders table
+                                  for (const order of resas.orders) {
+                                        const itemName = await fetchItemDetails(order.itemno);
+                                        const row = ordersTable.insertRow();
+                                        let cell = row.insertCell();
+                                        cell.textContent = itemName;
+                                        cell = row.insertCell();
+                                        cell.textContent = order.quantity;
+                                        cell = row.insertCell();
+                                        cell.textContent = `Rs${order.price}`;
+                                        cell = row.insertCell();
+                                        const lineTotal = order.quantity * order.price;
+                                        cell.textContent = `Rs${lineTotal.toFixed(2)}`;
+                                  }
+
+                                  ordersCell.appendChild(ordersTable);
+                                  ordersRow.appendChild(ordersCell);
+                                  resasTableBody.appendChild(ordersRow);
+                            }
+                      }
+
+                      // Update total amount display
+                      const totalDisplay = document.getElementById('total');
+                      if (totalDisplay) {
+                            totalDisplay.textContent = `Total amount: Rs ${total.toFixed(2)}`;
+                      }
+                } else {
+                      resasTableBody.innerHTML = '<tr><td colspan="9">No reservations available.</td></tr>';
+                }
+          } catch (error) {
+                console.error('Failed to fetch reservations:', error);
+          }
+    }
+  </script>
+</body>
+</html>

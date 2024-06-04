@@ -1,5 +1,5 @@
 {
-  "name": "myapp",
+  "name": "frontend",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -9,8 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.3"
   }
 }
