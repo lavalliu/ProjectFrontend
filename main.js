@@ -11,8 +11,8 @@ app.use(bodyParser.urlencoded({ extended: true }));  // parse requests of conten
 // app.set('view engine', 'ejs');
 
 //index page
-app.get('/index', (req,res) => {
-    res.render('index.ejs');
+app.get('/', (req,res) => {
+    res.render('index');
 });
 
 const port=3001;
