@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));  // parse requests of conten
 // app.set('view engine', 'ejs');
 
 //index page
-app.get('/', (req,res) => {
+app.get('/index', (req,res) => {
     res.render('index.ejs');
 });
 
