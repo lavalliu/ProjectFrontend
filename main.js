@@ -5,6 +5,7 @@ const app=express();
 app.use(bodyParser.json());  // parse requests of content-type - application/json
 app.use(bodyParser.urlencoded({ extended: true }));  // parse requests of content-type - application/x-www-form-urlencoded
 
+app.set('view engine', 'ejs');
 
 // const path = require('path');
 // app.set('views', path.join(__dirname, 'views'));
