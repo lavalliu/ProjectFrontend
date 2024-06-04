@@ -12,11 +12,11 @@ app.set('view engine', 'ejs');
 // app.set('view engine', 'ejs');
 
 const path = require('path');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join('/', 'views'));
 
 //index page
 app.get('/', (req,res) => {
-    res.render('index.ejs');
+    res.render('index');
 });
 
 const port = 3001;
