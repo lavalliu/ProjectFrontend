@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 
 //index page
 app.get('/', (req,res) => {
-    res.render('index');
+    res.render('index.ejs');
 });
 
 const port=3001;
