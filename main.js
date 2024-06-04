@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({ extended: true }));  // parse requests of conten
 
 //index page
 app.get('/', (req,res) => {
-    res.render('/VIEWS/index.ejs');
+    res.render('/index.ejs');
 });
 
 const port=3001;
