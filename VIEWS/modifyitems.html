@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Project</title>
+
+    <!-- LINK TO BOOTSTRAP  AND STYLESHEET -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    <link href="../PUBLIC/style.css" rel="stylesheet">
+
+      <!-- NAVBAR -->
+      <nav class="navbar navbar-expand-sm navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand">ROYAL RESTAURANT</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item" id="cartIcon">
+                <a href="order.html" class="nav-link" id="myorder">My Order(<span id="cartCount">0</span>)</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"><span id="usernameDisplay"></span></a>
+              </li>			
+              <li class="nav-item">
+                <a class="nav-link" id="logout" href="index.html">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+</head >
+<body>
+<!-- MENU ITEMS LIST -->
+
+<section class="about" id="about">
+  <br><br><br>
+  <div class="title">
+    <h1 class="text-center">Modify Menu Items</h1>
+    <br>
+      <form id="menuItemsForm">
+      <!-- Menu items will be inserted here by JavaScript -->
+      </form>
+      <!-- <div class="d-flex justify-content-between"> -->
+      <div class="d-flex justify-content-center gap-5">
+          <button type="button" class="btn btn-primary" id="saveButton">Save Changes</button>
+          <!-- <button type="button" class="btn btn-primary" id="addNewItem">Add New Item</button> -->
+      </div>
+  </div> 
+</section>
+    <!-- footer here -->        
+    <div class="footer">
+      <p>L.Liu @2023</p>
+    </div>
+      <script src="../PUBLIC/commonscript.js"></script>
+      <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+      <script>
+            // function to create list of existing items in the DB
+            function createMenuItemRow(menuItem, index) {
+                  const itemno = menuItem.itemno ?? 'No item number';
+                  const itemname = menuItem.itemname ?? 'No name';
+                  const group = menuItem.group ?? 'No group';
+                  const description = menuItem.description ?? 'No description';
+                  const price = menuItem.price ?? '0';
+                  const status = menuItem.status ?? false;
+                  const checkedAttribute = status ? 'checked' : ''; 
+                  return `
+                  <div class="mb-3 row" data-itemno="${itemno}">
+                  <div class="col-3">
+                  <input type="text" class="form-control" value="${itemname}" data-field="itemname">
+                  </div>
+                  <div class="col-2">
+                  <input type="text" class="form-control" value="${group}" data-field="group">
+                  </div>
+                  <div class="col-4">
+                  <input type="text" class="form-control" value="${description}" data-field="description">
+                  </div>
+                  <div class="col-2">
+                  <input type="number" class="form-control" value="${price}" data-field="price">
+                  </div>
+                  <div class="col-1">
+                  <input type="checkbox" class="form-check-input" ${checkedAttribute} data-field="status">
+                  </div>
+                  </div>
+                  `;
+            }
+
+            // Fetch and display menu items
+            fetch('http://localhost:3000/items')
+            .then(response => response.json())
+            .then(data => {
+                        const menuItems = data.items;
+                        const form = document.getElementById('menuItemsForm');
+                        menuItems.forEach((menuItem, index) => {
+                              const div = document.createElement('div');
+                              div.className = 'mb-3 row';
+                              div.setAttribute('data-itemno', menuItem.itemno);
+                              div.innerHTML = createMenuItemRow(menuItem, index);
+                              form.appendChild(div);
+                        });
+                  })
+            .catch(error => {
+                  console.error('Fetch error:', error);
+            });
+
+            // Save changes event listener
+            document.getElementById('saveButton').addEventListener('click', function() {
+                  const rows = document.querySelectorAll('#menuItemsForm .row');
+                  const items = Array.from(rows).map(row => {
+                  const isNew = row.hasAttribute('data-new');   
+                        return {
+                              itemno: isNew ? null :row.getAttribute('data-itemno'),
+                              itemname: row.querySelector('[data-field="itemname"]').value,
+                              group: row.querySelector('[data-field="group"]').value,
+                              description: row.querySelector('[data-field="description"]').value,
+                              price: row.querySelector('[data-field="price"]').value,
+                              status: row.querySelector('[data-field="status"]').checked,
+                              isNew: isNew
+                        };
+                  });
+
+                  fetch('http://localhost:3000/items/updateItems', { 
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                            body: JSON.stringify({ items: items }) 
+                        })
+                  .then(response => response.json())
+                  .then(data => {
+                      if(data.message === 'All menu items updated successfully') {
+                      alert('Menu items updated successfully!');
+                      window.location.href = 'user.html';
+                      } else {
+                      alert('Failed to update menu items.');
+                      }
+                  })
+                  .catch(error => {
+                      console.error('Error:', error);
+                  });                         
+            });
+      </script>
+    </body>
+</html>

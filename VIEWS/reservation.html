@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Project</title>
+
+    <!-- LINK TO BOOTSTRAP  AND STYLESHEET -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    <link href="../PUBLIC/style.css" rel="stylesheet">
+
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-sm navbar-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">ROYAL RESTAURANT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="starters.html">Starter</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="maincourse.html">Main Course</a>
+              </li>			
+              <li class="nav-item">
+                <a class="nav-link" href="desserts.html">Desserts</a>
+              </li>	
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Beverage
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li><a class="dropdown-item" href="soft.html">Soft</a></li>
+                  <li><a class="dropdown-item" href="cocktails.html">Cocktails</a></li>
+                  <li><a class="dropdown-item" href="aperitifs.html">Aperitifs</a></li>
+                  <li><a class="dropdown-item" href="hot.html">Hot Beverage</a></li>
+                  <li><a class="dropdown-item" href="wine.html">Wine</a></li>
+                </ul>
+              </li>
+              </ul>		
+            </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item" id="cartIcon">
+                  <a href="order.html" class="nav-link" id="myorder"></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"><span id="usernameDisplay"></span></a>
+                </li>			
+                <li class="nav-item">
+                  <a class="nav-link" id="logout" href="index.html">Logout</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="about.html">About</a>
+                </li>			
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>	
+              </ul>
+            </div>
+         </div>
+        </nav>	
+    
+</head>
+<body>
+<!-- RESERVATION FORM 2005-->
+<section class="reservations" id="reservations">
+    <br><br><br>
+    <div class="title">
+      <h1 class="text-center">My Reservation</h1>
+      <br>
+      <div class="reservations-container">
+          <form id="resaForm">
+            <!-- <form id="resaForm" onsubmit="return validateForm()"> -->
+          <div class="row g-3">
+            <div class="row mb-3">
+              <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
+              <div class="col-md-4">
+              <span id="inputUsername" class="form-control-plaintext"></span>
+              </div>
+              <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+              <div class="col-md-4">
+                <input type="email" class="form-control" id="inputEmail" data-field="email">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputFirstname" class="col-sm-2 col-form-label">First Name</label>
+              <div class="col-md-4">
+                <input type="text" class="form-control" id="inputFirstname" data-field="fname">
+              </div>
+              <label for="inputLastname" class="col-sm-2 col-form-label">Last Name</label>
+              <div class="col-md-4">
+                <input type="text" class="form-control" id="inputLastname" data-field="lname">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputPersons" class="col-sm-2 col-form-label">Number of persons</label>
+              <div class="col-md-4">
+                <select id="inputPersons" class="form-select" pattern="[0-9]" data-field="pax">
+                  <option selected>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                </select>
+              </div>
+              <label for="inputPhone" class="col-sm-2 col-form-label">Phone Number</label>
+              <div class="col-md-4">
+                <input type="tel" class="form-control" id="inputPhone" minlength="7" maxlength="8" data-field="'phoneno">
+                <!-- to insert pattern validation -->
+              </div>            
+            </div>
+            <div class="row mb-3">
+              <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
+              <div class="col-md-4">
+                <input type="Date" class="form-control" id="inputDate" data-field="date">
+              </div>
+              <label for="inputTime" class="col-sm-2 col-form-label">Time</label>
+              <div class="col-md-4">
+                <input type="Time" class="form-control" id="inputTime" value="11:00" data-field="time">
+              </div>
+            </div>
+            <br>
+            <div class="row mb-3">
+              <label for="inputOther" class="col-sm-2 col-form-label">Other instructions or allergies</label>
+              <div class="col-md-4">
+                <textarea class="form-control" id="inputOther" rows="3"></textarea>
+              </div>   
+              <label for="inputTakeout" class="col-sm-2 col-form-label">Takeout</label>
+              <div class="col-md-4">
+                <input type="checkbox" id="inputTakeout" value="yes">
+              </div>   
+            </div>
+            <div class="text-center">
+              <button type="submit" id="saveResa" class="btn btn-primary" >Save New Reservation</button>
+            </div>
+            <div class="text-center">
+              <a class="btn btn-primary" >Existing reservation(s) below</a>
+            </div>
+            <table id="resasTable" class="resas">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Pax</th>
+                  <th scope="col">Other Inst.</th>
+                  <th scope="col">Takeout</th>
+                  <th scope="col">Order Total</th>
+                </tr>
+              </thead>
+              <tbody>
+              <!-- Orders will be inserted here -->
+              </tbody>
+            </table>
+            </div>
+          </form>
+      </div>
+    </div>
+    <br><br><br><br>
+  </section>    
+
+      <!-- footer here -->        
+      <div class="footer">
+        <p>L.Liu @2023</p>
+      </div>
+        <script src="../PUBLIC/commonscript.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <script>
+            let username;
+
+            // Event Listener to display the username and fetch reservations
+            document.addEventListener('DOMContentLoaded', function() {
+                  username = localStorage.getItem('username');
+                  if (username) {
+                        const usernameElement = document.getElementById('inputUsername');
+                        usernameElement.textContent = username;
+                        displayResas(username);
+                  }
+            });
+
+            // Function to fetch and display reservations by username
+            async function displayResas(username) {
+                  const resasTableBody = document.querySelector('#resasTable tbody');
+                  resasTableBody.innerHTML = ''; 
+
+                  try {
+                        // Fetch reservations details from the server
+                        const response = await fetch(`http://localhost:3000/reservations/user/${username}`);
+                        const data = await response.json();
+
+                        // Check if the 'resa' array exists and has elements
+                        if (data.resa && data.resa.length > 0) {
+                              const resasDetails = data.resa; 
+                              let total = 0;
+                              const today = new Date();
+                              today.setHours(0, 0, 0, 0);
+
+                              for (const resas of resasDetails) {
+                                    // Parse the reservation date
+                                    const resasDate = new Date(resas.date);
+
+                                    // Check if the reservation date is today or in the future
+                                    if (resasDate >= today) {
+                                          // Calculate total for each reservation
+                                          const reservationTotal = resas.orders.reduce((sum, order) => sum + (order.quantity * order.price), 0);
+                                          total += reservationTotal; // Add to the overall total
+
+                                          // Create a row for reservation details
+                                          const resasRow = document.createElement('tr');
+                                          resasRow.innerHTML = `
+                                          <td>${resas.date ? formatDate(resas.date) : 'Date not available'}</td>
+                                          <td>${resas.time || 'Time not available'}</td>
+                                          <td>${resas.fname + ' ' + resas.lname || 'Full name not available'}</td>
+                                          <td>${resas.email || 'Email not available'}</td>
+                                          <td>${resas.phoneno || 'Phone number not available'}</td>
+                                          <td>${resas.pax || 'Pax not available'}</td>
+                                          <td>${resas.other || ''}</td>
+                                          <td>${resas.takeout ? 'Yes' : 'No'}</td>
+                                          <td>${reservationTotal ? `Rs${reservationTotal}` : 'No Orders available'}</td>
+                                          `;
+                                          resasTableBody.appendChild(resasRow);
+                                          // Create a row for orders if there are any
+                                          if (resas.orders.length > 0) {
+                                                const ordersRow = document.createElement('tr');
+                                                const ordersCell = document.createElement('td');
+                                                ordersCell.colSpan = 8; // Span across all columns
+                                                const ordersList = document.createElement('ul');
+
+                                                // Create a table element
+                                                const ordersTable = document.createElement('table');
+                                                ordersTable.classList.add('orders-table');
+
+                                                // Create the header row
+                                                const headerRow = ordersTable.insertRow();
+                                                const headers = ['Item Name', 'Quantity Ordered', 'Price Each', 'Line Total'];
+                                                headers.forEach(headerText => {
+                                                      let headerCell = document.createElement('th');
+                                                      headerCell.textContent = headerText;
+                                                      headerRow.appendChild(headerCell);
+                                                });
+                                                for (const order of resas.orders) {
+                                                      const itemName = await fetchItemDetails(order.itemno);
+                                                      const lineTotal = order.quantity * order.price;
+                                                      const row = ordersTable.insertRow();
+                                                      let cell = row.insertCell();
+                                                      cell.textContent = itemName;
+                                                      cell = row.insertCell();
+                                                      cell.textContent = order.quantity;
+                                                      cell = row.insertCell();
+                                                      cell.textContent = `Rs${order.price}`;
+                                                      cell = row.insertCell();
+                                                      cell.textContent = `Rs${lineTotal}`;
+                                                }
+
+                                                ordersList.appendChild(ordersTable);
+                                                ordersCell.appendChild(ordersList);
+                                                ordersRow.appendChild(ordersCell);
+                                                resasTableBody.appendChild(ordersRow);
+                                          }
+                                    }
+                              }
+                              document.getElementById('total').textContent = `Total amount: Rs ${total.toFixed(2)}`;
+                        } else {
+                              resasTableBody.innerHTML = '<tr><td colspan="8">No reservations available.</td></tr>';
+                        }
+                  } catch (error) {
+                        console.error('Failed to fetch reservations:', error);
+                  }
+            }
+
+            // Event Listener to Save a reservation
+            document.getElementById('resaForm').addEventListener('submit', function(event) {
+                  event.preventDefault(); 
+                  const formData = {
+                        username: username,
+                        pax: document.getElementById('inputPersons').value,
+                        fname: document.getElementById('inputFirstname').value,
+                        lname: document.getElementById('inputLastname').value,
+                        email: document.getElementById('inputEmail').value,
+                        phoneno: document.getElementById('inputPhone').value,
+                        date: document.getElementById('inputDate').value,
+                        time: document.getElementById('inputTime').value,
+                        takeout: document.getElementById('inputTakeout').value,
+                        other: document.getElementById('inputOther').value,
+                  };
+                  alert('Reservation created successfully!');
+                  saveFormData(formData);
+                  window.location.href = 'displayresa.html';
+            });
+
+            function saveFormData(formData) {
+                   localStorage.setItem('myResaData', JSON.stringify(formData));
+            }
+
+            // Function to format the date from ISO string to DD-MM-YYYY
+            function formatDate(isoString) {
+                  const date = new Date(isoString);
+                  const day = String(date.getDate()).padStart(2, '0');
+                  const month = String(date.getMonth() + 1).padStart(2, '0');
+                  const year = date.getFullYear();
+                  return `${day}-${month}-${year}`;
+            }
+        </script>
+</body>
+</html>
