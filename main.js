@@ -6,9 +6,9 @@ app.use(bodyParser.json());  // parse requests of content-type - application/jso
 app.use(bodyParser.urlencoded({ extended: true }));  // parse requests of content-type - application/x-www-form-urlencoded
 
 
-const path = require('path');
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+// const path = require('path');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
 
 //index page
 app.get('/', (req,res) => {
