@@ -13,9 +13,6 @@ app.set("view engine", "ejs");
 // set the views folder
 app.set("views", __dirname + "/templates");
 
-// // set the public folder
-// app.use("/PUBLIC/", express.static("public/"));
-
 //index page
 app.get("/", (req, res) => {
   res.render("index");
