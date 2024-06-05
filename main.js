@@ -5,7 +5,6 @@ const app = express();
 app.use(bodyParser.json()); // parse requests of content-type - application/json
 app.use(bodyParser.urlencoded({ extended: true })); // parse requests of content-type - application/x-www-form-urlencoded
 
-<<<<<<< HEAD
 // set the view engine to ejs
 app.set("view engine", "ejs");
 
@@ -14,14 +13,6 @@ app.set("views", __dirname + "/views");
 
 // set the public folder
 app.use("/PUBLIC/", express.static("./PUBLIC/"));
-=======
-app.set('view engine', 'ejs');
-
-const path = require('path');
-app.set('views', path.join(__dirname, 'templates'));
-
-app.use(express.static(path.join(__dirname, 'public')));
->>>>>>> 22be2b55f5395694cf8f65fc03859664b5b89770
 
 //index page
 app.get("/", (req, res) => {
