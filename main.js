@@ -5,14 +5,16 @@ const app = express();
 app.use(bodyParser.json()); // parse requests of content-type - application/json
 app.use(bodyParser.urlencoded({ extended: true })); // parse requests of content-type - application/x-www-form-urlencoded
 
+app.use(express.static('public'));
+
 // set the view engine to ejs
 app.set("view engine", "ejs");
 
 // set the views folder
 app.set("views", __dirname + "/templates");
 
-// set the public folder
-app.use("/PUBLIC/", express.static("./PUBLIC/"));
+// // set the public folder
+// app.use("/PUBLIC/", express.static("public/"));
 
 //index page
 app.get("/", (req, res) => {
