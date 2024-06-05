@@ -11,103 +11,103 @@ app.use(express.static('public'));
 app.set("view engine", "ejs");
 
 // set the views folder
-app.set("views", __dirname + "/templates");
+app.set("views", __dirname + "/views");
 
 //index page
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index.ejs");
 });
 
 app.get("/about", (req, res) => {
-  res.render("index");
+  res.render("about.ejs");
 });
 
 app.get("/additems", (req, res) => {
-  res.render("index");
+  res.render("additems.ejs");
 });
 
 app.get("/aperitifs", (req, res) => {
-  res.render("index");
+  res.render("aperitifs.ejs");
 });
 
 app.get("/cocktails", (req, res) => {
-  res.render("index");
+  res.render("cocktails.ejs");
 });
 
 app.get("/contact", (req, res) => {
-  res.render("index");
+  res.render("contact.ejs");
 });
 
 app.get("/desserts", (req, res) => {
-  res.render("index");
+  res.render("desserts.ejs");
 });
 
 app.get("/displayresa", (req, res) => {
-  res.render("index");
+  res.render("displayresa.ejs");
 });
 
 app.get("/hot", (req, res) => {
-  res.render("index");
+  res.render("hot.ejs");
 });
 
 app.get("/listresas", (req, res) => {
-  res.render("index");
+  res.render("listresas.ejs");
 });
 
 app.get("/login", (req, res) => {
-  res.render("index");
+  res.render("login.ejs");
 });
 
 app.get("/maincourse", (req, res) => {
-  res.render("index");
+  res.render("maincourse.ejs");
 });
 
 app.get("/modifyitems", (req, res) => {
-  res.render("index");
+  res.render("modifyitems.ejs");
 });
 
-app.get("/navbar", (req, res) => {
-  res.render("index");
-});
+// app.get("/navbar", (req, res) => {
+//   res.render("navbar.ejs");
+// });
 
 app.get("/order", (req, res) => {
-  res.render("index");
+  res.render("order.ejs");
 });
 
 app.get("/page", (req, res) => {
-  res.render("index");
+  res.render("page.ejs");
 });
 
 app.get("/payment", (req, res) => {
-  res.render("index");
+  res.render("payment.ejs");
 });
 
 app.get("/register", (req, res) => {
-  res.render("index");
+  res.render("register.ejs");
 });
 
 app.get("/reservation", (req, res) => {
-  res.render("index");
+  res.render("reservation.ejs");
 });
 
 app.get("/soft", (req, res) => {
-  res.render("index");
+  res.render("soft.ejs");
 });
 
 app.get("/starters", (req, res) => {
-  res.render("index");
+  res.render("starters.ejs");
 });
 
 app.get("/update", (req, res) => {
-  res.render("index");
+  res.render("update.ejs");
 });
 
 app.get("/user", (req, res) => {
-  res.render("index");
+  res.render("user.ejs");
 });
 
 app.get("/wine", (req, res) => {
-  res.render("index");
+  res.render("wine.ejs");
 });
 
 const port = 3001;
