@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // parse requests of content
 app.set("view engine", "ejs");
 
 // set the views folder
-app.set("views", __dirname + "/views");
+app.set("views", __dirname + "/templates");
 
 // set the public folder
 app.use("/PUBLIC/", express.static("./PUBLIC/"));
