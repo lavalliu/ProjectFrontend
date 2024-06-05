@@ -7,12 +7,8 @@ app.use(bodyParser.urlencoded({ extended: true }));  // parse requests of conten
 
 app.set('view engine', 'ejs');
 
-// const path = require('path');
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
-
 const path = require('path');
-app.set('templates', path.join('/', 'templates'));
+app.set('views', path.join('/', 'views'));
 
 //index page
 app.get('/', (req,res) => {
