@@ -20,13 +20,13 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto">
                   <li class="nav-item" id="cartIcon">
-                        <a href="order.html" class="nav-link" id="myorder"></a>
+                        <a href="/order" class="nav-link" id="myorder"></a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link"><span id="usernameDisplay"></span></a>
                       </li>			
                       <li class="nav-item">
-                        <a class="nav-link" id="logout" href="index.html">Logout</a>
+                        <a class="nav-link" id="logout" href="/index">Logout</a>
                       </li>
               </li>	
             </ul>
@@ -116,7 +116,7 @@
                                 .then(data => {
                                       if (data.message === 'Item created' || data.message === 'Items created successfully') {
                                             alert('New menu items created successfully!');
-                                            window.location.href = 'users.html'
+                                            window.location.href = '/users'
                                       } else {
                                             alert('Failed to create new menu items.');
                                       }
