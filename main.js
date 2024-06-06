@@ -1,5 +1,5 @@
 const express = require("express");
-const path = require('path');
+// const path = require('path');
 const app = express();
 const bodyParser = require("body-parser");
 
@@ -15,7 +15,7 @@ app.set('views', path.join(__dirname, '/views'));
 app.set("view engine", "ejs");
 
 app.use('/images',express.static(path.join(__dirname, 'public/images')));
-app.use('/js',express.static(path.join(__dirname, 'public/js')));
+app.use('/javascript',express.static(path.join(__dirname, 'public/js')));
 app.use('/css',express.static(path.join(__dirname, 'public/css')));
 
 app.get("/", (req, res) => {
