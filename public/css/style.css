@@ -4,7 +4,7 @@ html,h1{
     color: black;
 }
 body {
-    background-image: url(../PUBLIC/background2.png);
+    background-image: url(/images/background2.png);
 }
 .navbar {
     background-color: rgb(25,84,117);
@@ -135,7 +135,7 @@ p {
 .title-starters, .title-maincourse, .title-hot, .title-desserts, .title-aperitifs, .title-cocktails, .title-soft, .title-wine {
     margin: auto;
     width: 70%;
-    background-image: url(../PUBLIC/background2.png);
+    background-image: url(/images/background2.png);
     font-size: 30px;
     padding-top: 50px;
     padding-bottom: 50px;
@@ -143,28 +143,28 @@ p {
     background-size: cover;
 }
 .title-starters {
-    background-image: URL(../PUBLIC/salad1.png);
+    background-image: URL(/images/salad1.png);
 }
 .title-maincourse {
-    background-image: URL(../PUBLIC/severalplates3.png);
+    background-image: URL(/images/severalplates3.png);
 }
 .title-desserts {
-    background-image: URL(../PUBLIC/desserts.png);
+    background-image: URL(/images/desserts.png);
 }
 .title-soft {
-    background-image: URL(../PUBLIC/SOFT.jpg);
+    background-image: URL(/images/SOFT.jpg);
 }
 .title-cocktails {
-    background-image: URL(../PUBLIC/cocktails.jpg);
+    background-image: URL(/images/cocktails.jpg);
 }
 .title-aperitifs {
-    background-image: URL(../PUBLIC/aperitif2.jpeg);
+    background-image: URL(/images/aperitif2.jpeg);
 }
 .title-wine {
-    background-image: URL(../PUBLIC/Wine.png);
+    background-image: URL(/images/Wine.png);
 }
 .title-hot {
-    background-image: URL(../PUBLIC/Coffee.jpg);
+    background-image: URL(/images/Coffee.jpg);
 }
 .menu-item {
     background-color: rgb(227, 227, 217);
