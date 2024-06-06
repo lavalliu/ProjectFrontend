@@ -54,7 +54,7 @@
           <a class="nav-link"><span id="usernameDisplay"></span></a>
         </li>			
         <li class="nav-item">
-          <a class="nav-link" id="logout" href="/index">Logout</a>
+          <a class="nav-link" id="logout" href="/">Logout</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/about">About</a>
@@ -93,22 +93,22 @@
             }
             if (editProfile) {
                   editProfile.addEventListener('click', function() {
-                        window.location.href = 'update.html';
+                        window.location.href = 'update';
                   });
             }
             if (username === 'Admin') {
                   dynamicSection.innerHTML = `
                   <div class="icon-container">
                     <div class="icon-item">
-                      <img src="../PUBLIC/Items./css/style.css" alt="Add Menus">
+                      <img src="/css/style.css" alt="Add Menus">
                       <span class="icon-text" id="addMenus">Add Menus</span>
                     </div>
                     <div class="icon-item">
-                      <img src="../PUBLIC/Items./css/style.css" alt="Modify Menus">
+                      <img src="/css/style.css" alt="Modify Menus">
                       <span class="icon-text" id="modifyMenus">Modify Menus</span>
                     </div>
                     <div class="icon-item">
-                      <img src="../PUBLIC/list.svg" alt="List all Reservations">
+                      <img src="/images/list.svg" alt="List all Reservations">
                       <span class="icon-text" id="listResas">List of Reservations</span>
                     </div>
                   </div>`;
@@ -116,27 +116,27 @@
                   const addMenus = document.getElementById('addMenus');
                   if (addMenus) {
                         addMenus.addEventListener('click', function() {
-                            window.location.href = 'additems.html'; 
+                            window.location.href = 'additems'; 
                         });
                   }
                   const modifyMenus = document.getElementById('modifyMenus');
                   if (modifyMenus) {
                         modifyMenus.addEventListener('click', function() {
-                              window.location.href = 'modifyitems.html'; 
+                              window.location.href = 'modifyitems'; 
                         });
                   }
                   const listResas = document.getElementById('listResas');
                   if (listResas) {
                         listResas.addEventListener('click', function() {
-                              window.location.href = 'listresas.html'; 
+                              window.location.href = 'listresas'; 
                         });
                   }
             } else {
-                  dynamicSection.innerHTML = '<img src="../PUBLIC/Restaurant Table.svg" alt="Table Reservation"><span class="icon-text" id="reserveTable">Reservation</span>';
+                  dynamicSection.innerHTML = '<img src="/images/RestaurantTable.svg" alt="Table Reservation"><span class="icon-text" id="reserveTable">Reservation</span>';
                   const reserveTable = document.getElementById('reserveTable');
                   if (reserveTable) {
                         reserveTable.addEventListener('click', function() {
-                              window.location.href = 'reservation.html';
+                              window.location.href = 'reservation';
                         });
                   }
             }
