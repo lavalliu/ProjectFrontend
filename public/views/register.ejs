@@ -118,7 +118,7 @@
       const data = await response.json();
       if (response.ok) {
           alert('User ' + data.user.username + ' registered Sucessfully');
-          window.location.href = 'login.html'; 
+          window.location.href = '/login'; 
       } else {
           alert('Error: ' + data.message);
       }
