@@ -5,7 +5,7 @@ const app = express();
 app.use(bodyParser.json()); // parse requests of content-type - application/json
 app.use(bodyParser.urlencoded({ extended: true })); // parse requests of content-type - application/x-www-form-urlencoded
 
-app.use(express.static('public'));
+app.use(express.static('/public'));
 
 app.set("view engine", "ejs");
 
@@ -13,9 +13,9 @@ app.set("view engine", "ejs");
 
 // app.set("public", __dirname + "/public");
 
-app.use('/public/images',express.static(path.join(__dirname, '/images')));
-app.use('/js',express.static(path.join(__dirname, 'public/js')));
-app.use('/css',express.static(path.join(__dirname, 'public/css')));
+// app.use('/images',express.static(path.join(__dirname, '/images')));
+// app.use('/js',express.static(path.join(__dirname, 'public/js')));
+// app.use('/css',express.static(path.join(__dirname, 'public/css')));
 
 app.get("/", (req, res) => {
   res.render("index.ejs");
