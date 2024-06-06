@@ -123,7 +123,7 @@
               const data = await response.json();
               if (response.ok) {
                   alert('User ' + username + ' updated successfully');
-                  window.location.href = 'user'; 
+                  window.location.href = '/user'; 
               } else {
                   alert('Error: ' + data.message);
               }
