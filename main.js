@@ -20,10 +20,6 @@ app.get("/", (req, res) => {
   res.render("index.ejs");
 });
 
-app.get("/", (req, res) => {
-  res.render("index.ejs");
-});
-
 app.get("/about", (req, res) => {
   res.render("about.ejs");
 });
