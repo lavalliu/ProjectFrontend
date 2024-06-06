@@ -9,11 +9,10 @@ app.use(bodyParser.json()); // parse requests of content-type - application/json
 
 app.use(express.static('/public'));
 
+// Set the views directory
+app.set('views', path.join(__dirname, '/views'));
+
 app.set("view engine", "ejs");
-
-app.set("views", __dirname + "/views");
-
-// app.set("public", __dirname + "/public");
 
 app.use('/images',express.static(path.join(__dirname, 'public/images')));
 app.use('/js',express.static(path.join(__dirname, 'public/js')));
