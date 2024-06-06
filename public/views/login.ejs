@@ -108,7 +108,7 @@
                 if (response.ok) {
                     localStorage.setItem('username', data.user.username);
                     alert('User ' + data.user.username + ' logged in sucessfully');
-                    window.location.href = 'user.html'; 
+                    window.location.href = '/user'; 
                 } else {
                     alert('Error: ' + data.message);
                 }

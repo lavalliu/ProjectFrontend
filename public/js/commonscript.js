@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    const reserveTableLink = document.querySelector('a.nav-link[href="login.html"]');
+    const reserveTableLink = document.querySelector('a.nav-link[href="/login"]');
     
     reserveTableLink.addEventListener('click', function(event) {
                 // Prevent the default link behavior
@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 
                 // Check if 'username' is stored in localStorage
                 if (localStorage.getItem('username')) {
-                    window.location.href = 'user.html';
+                    window.location.href = '/user';
                 } else {
-                    window.location.href = 'login.html';
+                    window.location.href = '/login';
                 }
     });
 });
@@ -18,7 +18,7 @@ function logout() {
     localStorage.removeItem('myResaData');
     localStorage.removeItem('orders');
     localStorage.removeItem('username');
-    window.location.href = 'index.html';
+    window.location.href = '/index';
 }
 
 function displayWelcomeMessageAndHandleLogout() {
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', displayWelcomeMessageAndHandleLogo
 // Function to fetch item details by item number
 async function fetchItemDetails(itemNo) {
     try {
-            const response = await fetch(`http://localhost:3000/items/${itemNo}`);
+            const response = await fetch(`https://projectbackend-fndm.onrender.com/items/${itemNo}`);
             const itemData = await response.json();
             return itemData.customer.itemname; // Accessing 'itemname' from the 'customer' object
     } catch (error) {
