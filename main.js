@@ -1,5 +1,5 @@
 const express = require("express");
-const path = require('path');
+const path = require('path'); // hint from Akash :) 
 const app = express();
 const bodyParser = require("body-parser");
 
@@ -67,10 +67,6 @@ app.get("/maincourse", (req, res) => {
 app.get("/modifyitems", (req, res) => {
   res.render("modifyitems.ejs");
 });
-
-// app.get("/navbar", (req, res) => {
-//   res.render("navbar.ejs");
-// });
 
 app.get("/order", (req, res) => {
   res.render("order.ejs");
