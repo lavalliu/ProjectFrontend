@@ -1,5 +1,5 @@
 const express = require("express");
-// const path = require('path');
+const path = require('path');
 const app = express();
 const bodyParser = require("body-parser");
 
@@ -10,7 +10,7 @@ app.use(bodyParser.json()); // parse requests of content-type - application/json
 app.use(express.static('/public'));
 
 // Set the views directory
-app.set('views', path.join(__dirname, '/views'));
+app.set('/views', path.join(__dirname, '/public/views'));
 
 app.set("view engine", "ejs");
 
