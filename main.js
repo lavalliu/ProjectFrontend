@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require('path');
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -13,9 +14,9 @@ app.set("view engine", "ejs");
 
 // app.set("public", __dirname + "/public");
 
-// app.use('/images',express.static(path.join(__dirname, '/images')));
-// app.use('/js',express.static(path.join(__dirname, 'public/js')));
-// app.use('/css',express.static(path.join(__dirname, 'public/css')));
+app.use('/images',express.static(path.join(__dirname, 'public/images')));
+app.use('/js',express.static(path.join(__dirname, 'public/js')));
+app.use('/css',express.static(path.join(__dirname, 'public/css')));
 
 app.get("/", (req, res) => {
   res.render("index.ejs");
