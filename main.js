@@ -7,13 +7,12 @@ app.use(bodyParser.urlencoded({ extended: true })); // parse requests of content
 
 app.use(express.static('public'));
 
-// set the view engine to ejs
 app.set("view engine", "ejs");
 
-// set the views folder
 app.set("views", __dirname + "/views");
 
-//index page
+app.set("public", __dirname + "/public");
+
 app.get("/", (req, res) => {
   res.render("index.ejs");
 });
