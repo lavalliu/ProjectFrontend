@@ -242,7 +242,7 @@
                                 orderRow.innerHTML = `
                                 <td>${orderDetails.group || 'Group not available'}</td>
                                 <td>${orderDetails.itemname || 'Name not available'}</td>
-                                <td>${orderDetails.description || 'Description not available'}</td>
+                                <td>${orderDetails.description || ' '}</td>
                                 <td>${orderDetails.price ? `Rs${orderDetails.price}` : 'Price not available'}</td>
                                 <td>
                                 <input class="quantity-input" type="number" id="${orderDetails.itemno}" name="quantity" data-price="${orderDetails.price}" value="${orderDetails.quantity || 0}" min="0" onchange="updateOrder(this, ${orderDetails.itemno}, ${orderDetails.price})">
