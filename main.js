@@ -5,12 +5,12 @@ const bodyParser = require("body-parser");
 
 
 app.use(bodyParser.json()); // parse requests of content-type - application/json
-// app.use(bodyParser.urlencoded({ extended: true })); // parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true })); // parse requests of content-type - application/x-www-form-urlencoded
 
-app.use(express.static('/public'));
+app.use(express.static('public'));
 
 // Set the views directory
-app.set('/views', path.join(__dirname, '/public/views'));
+app.set('views', path.join(__dirname, '/public/views'));
 
 app.set("view engine", "ejs");
 
