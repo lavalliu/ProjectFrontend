@@ -13,7 +13,7 @@
       <!-- NAVBAR -->
       <nav class="navbar navbar-expand-sm navbar-dark">
         <div class="container-fluid">
-          <a class="navbar-brand">ROYAL RESTAURANT</a>
+            <a class="navbar-brand" href="/">ROYAL RESTAURANT</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -94,6 +94,7 @@
                           itemname: row.querySelector('[data-field="itemname"]').value,
                           group: row.querySelector('[data-field="group"]').value,
                           description: row.querySelector('[data-field="description"]').value,
+                          status: row.querySelector('[data-field="status"]').checked,
                           price: parseFloat(row.querySelector('[data-field="price"]').value) || 0 // Ensure this is a number or 0
                     };
               });
