@@ -157,33 +157,69 @@
                         grpitems.forEach(menuItem => {
                               container.innerHTML += createMenuItemRow(menuItem);
                         });
-                        enableCheckboxes();
-                        attachCheckboxListeners();
-                  } else {
-                        console.error('Element with ID menuItemsForm not found.');
-                  }
-            })
-            .catch(error => {
-                  console.error('Fetch error:', error);
-            });
-            
-            function enableCheckboxes() {
-                  var reservationExists = localStorage.getItem('myResaData') !== null;
-                  var menuCheckboxes = document.querySelectorAll('input[type="checkbox"][name="menu"]');
-                  menuCheckboxes.forEach(function(checkbox) {
-                        checkbox.disabled = !reservationExists;
-                  });
-            }
 
-            function attachCheckboxListeners() {
-                  document.querySelectorAll('input[type="checkbox"][name="menu"]').forEach(checkbox => {
-                  checkbox.addEventListener('change', function() {
-                        const itemno = this.id.replace('menuItem', '');
-                        const price = this.dataset.price; // Assuming price is stored as a data attribute on the checkbox
-                        toggleQuantityField(this, itemno, price);
-                        });
-                  });
-            }
+
+                        // Call enableCheckboxes and attachCheckboxListeners only if reservation exists
+if (localStorage.getItem('myResaData') !== null) {
+enableCheckboxes();
+attachCheckboxListeners();
+}
+} else {
+console.error('Element with ID menuItemsForm not found.');
+}
+})
+.catch(error => {
+console.error('Fetch error:', error);
+});
+
+            //             enableCheckboxes();
+            //             attachCheckboxListeners();
+            //       } else {
+            //             console.error('Element with ID menuItemsForm not found.');
+            //       }
+            // })
+            // .catch(error => {
+            //       console.error('Fetch error:', error);
+            // });
+            
+
+
+            function enableCheckboxes() {
+var menuCheckboxes = document.querySelectorAll('input[type="checkbox"][name="menu"]');
+menuCheckboxes.forEach(function(checkbox) {
+checkbox.disabled = false; // No need to disable since we're not displaying them without reservation
+});
+}
+
+function attachCheckboxListeners() {
+document.querySelectorAll('input[type="checkbox"][name="menu"]').forEach(checkbox => {
+checkbox.addEventListener('change', function() {
+const itemno = this.id.replace('menuItem', '');
+const price = this.dataset.price; // Assuming price is stored as a data attribute on the checkbox
+toggleQuantityField(this, itemno, price);
+});
+});
+}
+
+
+
+            // function enableCheckboxes() {
+            //       var reservationExists = localStorage.getItem('myResaData') !== null;
+            //       var menuCheckboxes = document.querySelectorAll('input[type="checkbox"][name="menu"]');
+            //       menuCheckboxes.forEach(function(checkbox) {
+            //             checkbox.disabled = !reservationExists;
+            //       });
+            // }
+
+            // function attachCheckboxListeners() {
+            //       document.querySelectorAll('input[type="checkbox"][name="menu"]').forEach(checkbox => {
+            //       checkbox.addEventListener('change', function() {
+            //             const itemno = this.id.replace('menuItem', '');
+            //             const price = this.dataset.price; // Assuming price is stored as a data attribute on the checkbox
+            //             toggleQuantityField(this, itemno, price);
+            //             });
+            //       });
+            // }
             
             // Update cart count on page load
             updateOrderCounter();

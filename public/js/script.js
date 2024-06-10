@@ -83,10 +83,7 @@ function validateForm() {
         alert("The phone number entered is incorrect, please retry");
         return false;
     }
-    // need to add validation for total number of pax booked same time and validate with number of seats available
+    // in future to add validation for total number of pax booked same time and validate with number of seats available
     addReservation();
 }
 
-
-// to insert the actual date in the date field in the form
-// document.getElementById('inputDate').valueAsDate = new Date();
