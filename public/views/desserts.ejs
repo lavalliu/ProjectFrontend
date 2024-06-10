@@ -157,21 +157,19 @@
                         grpitems.forEach(menuItem => {
                               container.innerHTML += createMenuItemRow(menuItem);
                         });
-
-
                         // Call enableCheckboxes and attachCheckboxListeners only if reservation exists
-if (localStorage.getItem('myResaData') !== null) {
-      console.log("My resa data:", myResaData);
-enableCheckboxes();
-attachCheckboxListeners();
-}
-} else {
-console.error('Element with ID menuItemsForm not found.');
-}
-})
-.catch(error => {
-console.error('Fetch error:', error);
-});
+                        if (localStorage.getItem('myResaData') !== null) {
+                              console.log("My resa data:", myResaData);
+                              enableCheckboxes();
+                              attachCheckboxListeners();
+                        }
+            //       } else {
+            //             console.error('Element with ID menuItemsForm not found.');
+                  }
+            // })
+            // .catch(error => {
+            //       console.error('Fetch error:', error);
+            // });
 
             //             enableCheckboxes();
             //             attachCheckboxListeners();
@@ -181,8 +179,7 @@ console.error('Fetch error:', error);
             // })
             // .catch(error => {
             //       console.error('Fetch error:', error);
-            // });
-            
+            });
 
 
             function enableCheckboxes() {
