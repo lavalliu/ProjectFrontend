@@ -161,6 +161,7 @@
 
                         // Call enableCheckboxes and attachCheckboxListeners only if reservation exists
 if (localStorage.getItem('myResaData') !== null) {
+      console.log(myResaData)
 enableCheckboxes();
 attachCheckboxListeners();
 }
@@ -200,8 +201,6 @@ toggleQuantityField(this, itemno, price);
 });
 });
 }
-
-
 
             // function enableCheckboxes() {
             //       var reservationExists = localStorage.getItem('myResaData') !== null;
