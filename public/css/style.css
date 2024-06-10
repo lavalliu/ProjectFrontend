@@ -7,7 +7,7 @@ body {
     background-image: url(/images/background2.png);
 }
 .navbar {
-    background-color: rgb(25,84,117);
+    background-color: rgb(11,158,208);
     width: 100%;
     position: fixed;
     height: 65px;
@@ -31,7 +31,7 @@ ul {
     color: white;
     text-align: center;
     padding-top: 10px;
-    background-color: rgb(25,84,117);
+    background-color: rgb(11,158,208);
     z-index: 9;
 }
 .nav-item {
@@ -45,7 +45,7 @@ ul {
     display:inline;
 }
 .navbar-toggler {
-    background-color: rgb(25,84,117);
+    background-color: rgb(11,158,208);
 }
 .form-check-label .form-check-input ul li {
     display:inline;
@@ -119,10 +119,10 @@ p {
     color: white;
 }
 .dropdown-menu {
-    background-color: rgb(25,84,117);
+    background-color: rgb(11,158,208);
 }
 .dropdown-item {
-    background-color: rgb(25,84,117);
+    background-color: rgb(11,158,208);
     color: white;
 }
 .dropdown-item:hover {
@@ -194,24 +194,24 @@ h4 {
     width: 100%;
 }
 .btn, .btnnoclick {
-    background-color: rgb(25,84,117); 
+    background-color: rgb(11,158,208); 
     color: white;
     border-radius: 5px;
-    border: 1px solid rgb(25,84,117);
+    border: 1px solid rgb(11,158,208);
 }
 .btn:hover {
-    background-color: rgb(25,84,117);
-    border: 1px solid rgb(25,84,117);
+    background-color: rgb(11,158,208);
+    border: 1px solid rgb(11,158,208);
 }
 .form-group {
     font-size: 15px;
     display: inline-block;
-    color: rgb(25,84,117);
+    color: rgb(11,158,208);
     padding-top: 10px;
     text-align: center;
 }
 .container-fluid {
-    background-color: rgb(25,84,117);
+    background-color: rgb(11,158,208);
     color: white;
     width: 80%;
     position: fixed;
@@ -229,7 +229,7 @@ h4 {
 .grid-container-contact {  
     color: white;
     width: 40%;
-    background-color: rgb(25,84,117); 
+    background-color: rgb(11,158,208); 
     border-radius: 5px;
     display: grid;
     font-size: 10px;
@@ -248,7 +248,7 @@ h4 {
 }
 .grid-container-about {
     width: 60%;
-    background-color: rgb(25,84,117); 
+    background-color: rgb(11,158,208); 
     color: white;
     font-size: 15px;
     text-align: justify;
@@ -257,11 +257,11 @@ h4 {
     border-radius: 5px;
 }
 .collapse {
-    background-color: rgb(25,84,117);
+    background-color: rgb(11,158,208);
 }
 .login_container {
     width: 20%;
-    background-color: rgb(25,84,117); 
+    background-color: rgb(11,158,208); 
     color: white;
     font-size: 15px;
     text-align: justify;
