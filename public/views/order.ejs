@@ -136,7 +136,7 @@
               <table id="ordersTable" class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Menu</th>
+                    <th scope="col">Menu Section</th>
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
                     <th scope="col">Unit Price</th>
@@ -220,7 +220,6 @@
                     const ordersTableBody = document.querySelector('#ordersTable tbody');
                     const orders = JSON.parse(localStorage.getItem('orders')) || {};
                     ordersTableBody.innerHTML = '';
-
                     const itemsDetails = await Promise.all(Object.keys(orders).map(fetchItemDetails));
                     let total = 0;
                     const orderDetails = await Promise.all(
