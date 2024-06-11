@@ -64,3 +64,5 @@ async function fetchItemDetails(itemNo) {
             return 'Item name not available'; // Fallback value
     }
 }
+
+
