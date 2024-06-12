@@ -1,11 +1,7 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const reserveTableLink = document.querySelector('a.nav-link[href="/login"]');
-    
     reserveTableLink.addEventListener('click', function(event) {
-                // Prevent the default link behavior
                 event.preventDefault();
-                
-                // Check if 'username' is stored in localStorage
                 if (localStorage.getItem('username')) {
                     window.location.href = '/user';
                 } else {
@@ -47,7 +43,7 @@ function displayWelcomeMessageAndHandleLogout() {
     }
 }
 
-// Attach the logout function to your logout button or link
+// Attach the logout function to logout
 document.getElementById('logout').addEventListener('click', logout);
 
 // Call the function when the page loads
@@ -58,10 +54,10 @@ async function fetchItemDetails(itemNo) {
     try {
             const response = await fetch(`https://projectbackend-fndm.onrender.com/items/${itemNo}`);
             const itemData = await response.json();
-            return itemData.customer.itemname; // Accessing 'itemname' from the 'customer' object
+            return itemData.customer.itemname; 
     } catch (error) {
             console.error('Failed to fetch item details:', error);
-            return 'Item name not available'; // Fallback value
+            return 'Item name not available'; 
     }
 }
 

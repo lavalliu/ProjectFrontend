@@ -32,8 +32,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
           const group = menuItem.group ?? 'No group';
           const description = menuItem.description ?? 'No description';
           const price = menuItem.price ?? '0';
+          let isChecked = '';
+          let quantity = '1'; // Default quantity is 1
 
-          if (localStorage.getItem('myResaData') !== null) {
+      if (localStorage.getItem('myResaData') !== null) {
+          // Retrieve the current orders from localStorage
+          const orders = JSON.parse(localStorage.getItem('orders')) || {};
+          const orderno = orders[itemno.toString()]; // Get the order for the current item number
+
+          // Check if the current item number matches an order and set the checkbox and quantity          
+            if (orderno && orderno.quantity > 0) {
+                  isChecked = 'checked';
+                  quantity = orderno.quantity;
+            }
               return `
               <div class="menu-item" style="display: flex; justify-content: space-between; align-items: center;">
               <div>
@@ -42,8 +53,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
               <p>${description}</p>
               </div>
               <div>
-              <input type="checkbox" id="menuItem${itemno}" name="menu" value="${itemname}" data-price="${price}">
-              <input class="quantity-input" type="number" id="quantity${itemno}" name="quantity" value="1" style="display: none;" min="1" onchange="updateOrder(this, ${itemno}, ${price})">
+              <input type="checkbox" id="menuItem${itemno}" name="menu" value="${itemname}" data-price="${price}" ${isChecked ? 'checked' : ''}>
+              <input class="quantity-input" type="number" id="quantity${itemno}" name="quantity" value="${quantity || 1}" style="${isChecked ? "display: inline;" : "display: none;"}" min="1" onchange="updateOrder(this, ${itemno}, ${price})">
               </div>
               </div>
               `;
@@ -63,10 +74,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
           const quantityField = document.getElementById('quantity' + itemno);
           if (checkbox.checked) {
                 quantityField.style.display = 'block';
-                updateOrder(quantityField, itemno, Number(price)); // Parse price to a number
+                updateOrder(quantityField, itemno, Number(price)); 
           } else {
                 quantityField.style.display = 'none';
-                updateOrder(quantityField, itemno, Number(price), true); // Parse price to a number even when removing
+                updateOrder(quantityField, itemno, Number(price), true); 
           }
     }
     
@@ -94,7 +105,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     function enableCheckboxes() {
           var menuCheckboxes = document.querySelectorAll('input[type="checkbox"][name="menu"]');
           menuCheckboxes.forEach(function(checkbox) {
-                checkbox.disabled = false; // No need to disable since we're not displaying them without reservation
+                checkbox.disabled = false; 
           });
     }
 
@@ -102,7 +113,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
           document.querySelectorAll('input[type="checkbox"][name="menu"]').forEach(checkbox => {
           checkbox.addEventListener('change', function() {
                 const itemno = this.id.replace('menuItem', '');
-                const price = this.dataset.price; // Assuming price is stored as a data attribute on the checkbox
+                const price = this.dataset.price; 
                 toggleQuantityField(this, itemno, price);
                 });
           });

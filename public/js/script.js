@@ -9,27 +9,27 @@ function plusSlides(n) {
 }
 
 function showSlides(n) {
-let i;
-let slides = document.getElementsByClassName("mySlides");
-if (n == undefined) {
-    n = ++Index;
-}
-if (n > slides.length) {
-    Index = 1;
-}    
-if (n < 1) {
-    Index = slides.length;
-}
-for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
-}
-slides[Index-1].style.display = "block";  
-t = setTimeout(showSlides, 5000); 
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    if (n == undefined) {
+        n = ++Index;
+    }
+    if (n > slides.length) {
+        Index = 1;
+    }    
+    if (n < 1) {
+        Index = slides.length;
+    }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    slides[Index-1].style.display = "block";  
+    t = setTimeout(showSlides, 5000); 
 }
 
 // function to store data from forms in objects
 function addReservation() {
-let reservations=[];
+    let reservations=[];
         let reservation={
             Title: document.getElementById('inputTitle').value,
             Pax: document.getElementById('inputPersons').value,
