@@ -113,28 +113,31 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script>
       document.getElementById('registerForm').addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      const email = document.getElementById('email').value;       
-      const phoneno = document.getElementById('phoneno').value;
-      const role = 'client';
-      
-      const response = await fetch('https://projectbackend-fndm.onrender.com/users/register', {
-          method: 'POST',
-          headers: {
-          'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ username, password, email, phoneno, role })
-      });
-      
-      const data = await response.json();
-      if (response.ok) {
-          alert('User ' + data.user.username + ' registered Sucessfully');
-          window.location.href = '/login'; 
-      } else {
-          alert('Error: ' + data.message);
-      }
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const email = document.getElementById('email').value;       
+            const phoneno = document.getElementById('phoneno').value;
+            const role = 'client';
+            
+            const response = await fetch('https://projectbackend-fndm.onrender.com/users/register', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password, email, phoneno, role })
+            });
+            if (password !== password2) {
+                alert('Password does not match, please retry')
+            } else {
+                  const data = await response.json();
+                  if (response.ok) {
+                      alert('User ' + data.user.username + ' registered Sucessfully');
+                      window.location.href = '/login'; 
+                  } else {
+                      alert('Error: ' + data.message);
+                  }
+            }
       });
   </script>
 </body>
