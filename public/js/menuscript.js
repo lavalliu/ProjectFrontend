@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
     
     // Fetch the menu items and populate the menu
-    fetch('http://localhost:3000/items')
+    fetch('https://projectbackend-fndm.onrender.com/items')
     .then(response => response.json())
     .then(data => {
           const menuItems = data.items;
