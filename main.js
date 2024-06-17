@@ -2,6 +2,8 @@ const express = require("express");
 const path = require('path'); // hint from Akash :) 
 const app = express();
 const bodyParser = require("body-parser");
+const PORT = process.env.PORT || 3000;
+
 
 app.use(bodyParser.json()); // parse requests of content-type - application/json
 app.use(bodyParser.urlencoded({ extended: true })); // parse requests of content-type - application/x-www-form-urlencoded
@@ -17,6 +19,10 @@ app.use('/js',express.static(path.join(__dirname, 'public/js')));
 app.use('/css',express.static(path.join(__dirname, 'public/css')));
 
 app.get("/", (req, res) => {
+  res.render("index.ejs");
+});
+
+app.get("/index", (req, res) => {
   res.render("index.ejs");
 });
 

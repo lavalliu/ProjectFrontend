@@ -118,27 +118,63 @@
 
         async function forgot() {
               const username = document.getElementById('username').value;
-              try { 
-                  const response = await fetch('https://projectbackend-fndm.onrender.com/usermail/:username', {
-                    method: 'GET',
-                    headers: {
-                    'Content-Type': 'application/json'
-                    },
-                    // body: JSON.stringify({ username })
-                  });
-                const data = await response.json();
-                if (response.ok) {
-                    localStorage.setItem('username', data.user.username);
-                    alert('Password has been reset for user ' + data.user.username + ' and Mail has been sent to the address attached to the username');
-                    window.location.href = '/user'; 
-                } else {
-                    alert('Error: ' + data.message);
-                }
-              } catch (error) {
-                console.error('There was an error processing your request:', error);
-              }
+              try {
+                        const response = await fetch(`https://projectbackend-fndm.onrender.com/users/${username}`);
+                        if (response.status === 404) {
+                              alert(`Username ${username} not found. Please check the username and retry`);
+                              return;
+                        }
+                        if (!response.ok) {
+                              throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        const data = await response.json();
+                        if (data.success && data.customer) {
+                              const { email } = data.customer;
+                              const resetResponse = await fetch('/api/reset-password', {
+                                    method: 'POST',
+                                    headers: {
+                                      'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ email, username })
+                              });
+                              const resetData = await resetResponse.json();
+                              if (resetData.success) {
+                                    alert(`Password has been reset for user ${username} and has been sent to the email address attached to it`);
+                                    logout()
+                              } else {
+                                    alert(reseytData.message);
+                              }
+                        } else {
+                              alert('An unexpected error occurred. Please try again.');
+                        }
+                  } catch (error) {
+                        console.error('There was an error processing your request:', error);
+                        alert(`Error: ${error.message}`);
+                  }
         }
-  
+
+      async function sendEmail(userEmail, username) {
+            let transporter = nodemailer.createTransport({
+                  host: 'smtp.intnet.mu', 
+                  port: 80, 
+                  secure: false, 
+                  auth: {
+                        user: 'generic_service@hotmail.com', 
+                        pass: 'Hotmailtest' 
+                  }
+            });
+            alert('Email send to : ', userEmail);
+            // Send mail with defined transport object
+            let info = await transporter.sendMail({
+                  from: '"Your Name" <laval_liu@hotmail.com>', 
+                  to: userEmail, 
+                  subject: 'ROYAL RESTAURANT - Password Reset', 
+                  text: `Hello ${username}, your password has been reset.`, 
+            });
+
+            alert('Message sent: %s', info.messageId);
+      }
+
 </script>
 </body>
 <footer>
