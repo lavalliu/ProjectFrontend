@@ -130,7 +130,7 @@
                         const data = await response.json();
                         if (data.success && data.customer) {
                               const { email } = data.customer;
-                              // passwordLink();
+                              passwordGenerateUpdate();
                               const resetResponse = await fetch('https://projectbackend-fndm.onrender.com/send-email', {
                                     method: 'POST',
                                     headers: {
@@ -156,30 +156,43 @@
                   logout()
         }
 
-      async function sendEmail(userEmail, username) {
-            let transporter = nodemailer.createTransport({
-                  host: 'smtp.intnet.mu', 
-                  port: 80, 
-                  secure: false, 
-                  auth: {
-                        user: 'generic_service@hotmail.com', 
-                        pass: 'Hotmailtest' 
-                  }
-            });
-            alert('Email send to : ', userEmail);
-            // Send mail with defined transport object
-            let info = await transporter.sendMail({
-                  from: '"Your Name" <laval_liu@hotmail.com>', 
-                  to: userEmail, 
-                  subject: 'ROYAL RESTAURANT - Password Reset', 
-                  text: `Hello ${username}, your password has been reset.`, 
-            });
+      // async function sendEmail(userEmail, username) {
+      //       let transporter = nodemailer.createTransport({
+      //             host: 'smtp.intnet.mu', 
+      //             port: 80, 
+      //             secure: false, 
+      //             auth: {
+      //                   user: 'generic_service@hotmail.com', 
+      //                   pass: 'Hotmailtest' 
+      //             }
+      //       });
+      //       alert('Email send to : ', userEmail);
+      //       // Send mail with defined transport object
+      //       let info = await transporter.sendMail({
+      //             from: '"Your Name" <laval_liu@hotmail.com>', 
+      //             to: userEmail, 
+      //             subject: 'ROYAL RESTAURANT - Password Reset', 
+      //             text: `Hello ${username}, your password has been reset.`, 
+      //       });
 
-            alert('Message sent: %s', info.messageId);
-      }
+      //       alert('Message sent: %s', info.messageId);
+      // }
 
-      function passwordLink() {
-
+      function passwordGenerateUpdate() {
+            const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
+            const passwordLength = Math.floor(Math.random() * 3) + 8; // Random length between 8 to 10
+            let password = '';
+            for (let i = 0; i < passwordLength; i++) {
+                  const randomIndex = Math.floor(Math.random() * characters.length);
+                  password += characters[randomIndex];
+            }
+            try {
+                  const hashedPassword = bcrypt.hash(password, 10);
+                  User.findByIdAndUpdate(username, { password: hashedPassword });
+                  console.log('Password updated successfully.');
+            } catch (error) {
+                  console.error('Error updating password:', error);
+            }
       }
 </script>
 </body>
