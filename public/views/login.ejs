@@ -178,22 +178,50 @@
       //       alert('Message sent: %s', info.messageId);
       // }
 
+      // function passwordGenerateUpdate() {
+      //       const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
+      //       const passwordLength = Math.floor(Math.random() * 3) + 8; // Random length between 8 to 10
+      //       let newpassword = '';
+      //       for (let i = 0; i < passwordLength; i++) {
+      //             const randomIndex = Math.floor(Math.random() * characters.length);
+      //             newpassword += characters[randomIndex];
+      //       }
+      //       try {
+      //             const hashedPassword = bcrypt.hash(newpassword, 10);
+      //             User.findByIdAndUpdate(userId, { password: hashedPassword });
+      //             console.log('Password updated successfully.');
+      //       } catch (error) {
+      //             console.error('Error updating password:', error);
+      //       }
+      //       console.log("Password :", newpassword)
+      // }
+
       function passwordGenerateUpdate() {
-            const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
-            const passwordLength = Math.floor(Math.random() * 3) + 8; // Random length between 8 to 10
-            let password = '';
-            for (let i = 0; i < passwordLength; i++) {
-                  const randomIndex = Math.floor(Math.random() * characters.length);
-                  password += characters[randomIndex];
-            }
-            try {
-                  const hashedPassword = bcrypt.hash(password, 10);
-                  User.findByIdAndUpdate(userId, { password: hashedPassword });
-                  console.log('Password updated successfully.');
-            } catch (error) {
-                  console.error('Error updating password:', error);
-            }
-      }
+const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
+const passwordLength = Math.floor(Math.random() * 3) + 8; // Random length between 8 to 10
+let newpassword = '';
+for (let i = 0; i < passwordLength; i++) {
+const randomIndex = Math.floor(Math.random() * characters.length);
+newpassword += characters[randomIndex];
+}
+console.log("Password :", newpassword);
+
+// Send the new password to the backend
+fetch('/send-email', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json'
+},
+body: JSON.stringify({ newpassword })
+})
+.then(response => response.json())
+.then(data => {
+console.log('Email sent successfully with new Password', data);
+})
+.catch((error) => {
+console.error('Error updating password:', error);
+});
+}
 </script>
 </body>
 <footer>
