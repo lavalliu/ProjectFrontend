@@ -207,12 +207,12 @@ newpassword += characters[randomIndex];
 console.log("Password :", newpassword);
 
 // Send the new password to the backend
-fetch('/send-email', {
+fetch('https://projectbackend-fndm.onrender.com/send-email', {
 method: 'POST',
 headers: {
 'Content-Type': 'application/json'
 },
-body: JSON.stringify({ newpassword })
+body: JSON.stringify({ newpassword, userId: 'theUserID' })
 })
 .then(response => response.json())
 .then(data => {
