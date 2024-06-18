@@ -1,51 +1,100 @@
-For the frontend part of your application, you'll need to handle user input and make requests to your backend to trigger the email sending process. Here's a general outline of what you need to do:
 
-Frontend Setup:
-1. 
-Create a Form: Design a form in your HTML to collect user input, such as the recipient's email address, subject, and message body.
-2. 
-Handle Form Submission: Use JavaScript to handle the form submission event. Prevent the default form submission with event.preventDefault() to avoid page reloads.
-3. 
-Send Data to Backend: Make an AJAX request (using fetch, axios, or any other HTTP client) to your backend endpoint with the form data.
-4. 
-Display Response: Show a success or error message based on the response from the backend.
-
-Here's a simple example using plain HTML and JavaScript with the fetch API:
-
-<!-- index.html -->
-<form id="emailForm">
-<input type="email" id="recipient" placeholder="Recipient's email" required>
-<input type="text" id="subject" placeholder="Subject" required>
-<textarea id="message" placeholder="Your message" required></textarea>
-<button type="submit">Send Email</button>
-</form>
-
-<div id="responseMessage"></div>
-
-<script>
-document.getElementById('emailForm').addEventListener('submit', function(event) {
-event.preventDefault();
-
-const recipient = document.getElementById('recipient').value;
-const subject = document.getElementById('subject').value;
-const message = document.getElementById('message').value;
-
-fetch('/send-email', {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json',
-},
-body: JSON.stringify({ to: recipient, subject: subject, text: message }),
-})
-.then(response => response.json())
-.then(data => {
-document.getElementById('responseMessage').innerText = data.message;
-})
-.catch(error => {
-console.error('Error:', error);
-document.getElementById('responseMessage').innerText = 'Failed to send email.';
+fastify.get('/', (req, reply) => {
+    reply.view('index.ejs');
 });
+    
+fastify.get("/", (req, reply) => {
+    reply.view("index.ejs");
 });
-</script>
+  
+fastify.get("/index", (req, reply) => {
+    reply.view("index.ejs");
+});
 
-In this example, when the 
+fastify.get("/about", (req, reply) => {
+    reply.view("about.ejs");
+});
+
+fastify.get("/additems", (req, reply) => {
+    reply.view("additems.ejs");
+});
+
+fastify.get("/aperitifs", (req, reply) => {
+    reply.view("aperitifs.ejs");
+});
+
+fastify.get("/cocktails", (req, reply) => {
+    reply.view("cocktails.ejs");
+});
+
+fastify.get("/contact", (req, reply) => {
+    reply.view("contact.ejs");
+});
+
+fastify.get("/desserts", (req, reply) => {
+    reply.view("desserts.ejs");
+});
+
+fastify.get("/displayresa", (req, reply) => {
+    reply.view("displayresa.ejs");
+});
+
+fastify.get("/hot", (req, reply) => {
+    reply.view("hot.ejs");
+});
+
+fastify.get("/listresas", (req, reply) => {
+    reply.view("listresas.ejs");
+});
+
+fastify.get("/login", (req, reply) => {
+    reply.view("login.ejs");
+});
+
+fastify.get("/maincourse", (req, reply) => {
+    reply.view("maincourse.ejs");
+});
+
+fastify.get("/modifyitems", (req, reply) => {
+    reply.view("modifyitems.ejs");
+});
+
+fastify.get("/order", (req, reply) => {
+    reply.view("order.ejs");
+});
+
+fastify.get("/page", (req, reply) => {
+    reply.view("page.ejs");
+});
+
+fastify.get("/payment", (req, reply) => {
+    reply.view("payment.ejs");
+});
+
+fastify.get("/register", (req, reply) => {
+    reply.view("register.ejs");
+});
+
+fastify.get("/reservation", (req, reply) => {
+    reply.view("reservation.ejs");
+});
+
+fastify.get("/soft", (req, reply) => {
+    reply.view("soft.ejs");
+});
+
+fastify.get("/starters", (req, reply) => {
+    reply.view("starters.ejs");
+});
+
+fastify.get("/update", (req, reply) => {
+    reply.view("update.ejs");
+});
+
+fastify.get("/user", (req, reply) => {
+    reply.view("user.ejs");
+});
+
+fastify.get("/wine", (req, reply) => {
+    reply.view("wine.ejs");
+});

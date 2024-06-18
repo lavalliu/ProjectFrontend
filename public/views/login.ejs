@@ -130,7 +130,8 @@
                         const data = await response.json();
                         if (data.success && data.customer) {
                               const { email } = data.customer;
-                              const resetResponse = await fetch('/api/reset-password', {
+                              // passwordLink();
+                              const resetResponse = await fetch('https://projectbackend-fndm.onrender.com/send-email', {
                                     method: 'POST',
                                     headers: {
                                       'Content-Type': 'application/json'
@@ -138,11 +139,12 @@
                                     body: JSON.stringify({ email, username })
                               });
                               const resetData = await resetResponse.json();
+                              console.log(resetData)
                               if (resetData.success) {
                                     alert(`Password has been reset for user ${username} and has been sent to the email address attached to it`);
                                     logout()
                               } else {
-                                    alert(reseytData.message);
+                                    alert(resetData.message);
                               }
                         } else {
                               alert('An unexpected error occurred. Please try again.');
@@ -151,6 +153,7 @@
                         console.error('There was an error processing your request:', error);
                         alert(`Error: ${error.message}`);
                   }
+                  logout()
         }
 
       async function sendEmail(userEmail, username) {
@@ -175,6 +178,9 @@
             alert('Message sent: %s', info.messageId);
       }
 
+      function passwordLink() {
+
+      }
 </script>
 </body>
 <footer>
