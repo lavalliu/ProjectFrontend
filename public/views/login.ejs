@@ -130,16 +130,16 @@
                         const data = await response.json();
                         if (data.success && data.customer) {
                               const { email } = data.customer;
-                              passwordGenerateUpdate();
+                              const newpassword = passwordGenerateUpdate();
+                              // Send the new password to the backend
                               const resetResponse = await fetch('https://projectbackend-fndm.onrender.com/send-email', {
                                     method: 'POST',
                                     headers: {
-                                      'Content-Type': 'application/json'
+                                    'Content-Type': 'application/json'
                                     },
-                                    body: JSON.stringify({ email, username })
+                                    body: JSON.stringify({ email, username, newpassword })
                               });
                               const resetData = await resetResponse.json();
-                              console.log(resetData)
                               if (resetData.success) {
                                     alert(`Password has been reset for user ${username} and has been sent to the email address attached to it`);
                                     logout()
@@ -156,72 +156,16 @@
                   logout()
         }
 
-      // async function sendEmail(userEmail, username) {
-      //       let transporter = nodemailer.createTransport({
-      //             host: 'smtp.intnet.mu', 
-      //             port: 80, 
-      //             secure: false, 
-      //             auth: {
-      //                   user: 'generic_service@hotmail.com', 
-      //                   pass: 'Hotmailtest' 
-      //             }
-      //       });
-      //       alert('Email send to : ', userEmail);
-      //       // Send mail with defined transport object
-      //       let info = await transporter.sendMail({
-      //             from: '"Your Name" <laval_liu@hotmail.com>', 
-      //             to: userEmail, 
-      //             subject: 'ROYAL RESTAURANT - Password Reset', 
-      //             text: `Hello ${username}, your password has been reset.`, 
-      //       });
-
-      //       alert('Message sent: %s', info.messageId);
-      // }
-
-      // function passwordGenerateUpdate() {
-      //       const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
-      //       const passwordLength = Math.floor(Math.random() * 3) + 8; // Random length between 8 to 10
-      //       let newpassword = '';
-      //       for (let i = 0; i < passwordLength; i++) {
-      //             const randomIndex = Math.floor(Math.random() * characters.length);
-      //             newpassword += characters[randomIndex];
-      //       }
-      //       try {
-      //             const hashedPassword = bcrypt.hash(newpassword, 10);
-      //             User.findByIdAndUpdate(userId, { password: hashedPassword });
-      //             console.log('Password updated successfully.');
-      //       } catch (error) {
-      //             console.error('Error updating password:', error);
-      //       }
-      //       console.log("Password :", newpassword)
-      // }
-
-      function passwordGenerateUpdate() {
-const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
-const passwordLength = Math.floor(Math.random() * 3) + 8; // Random length between 8 to 10
-let newpassword = '';
-for (let i = 0; i < passwordLength; i++) {
-const randomIndex = Math.floor(Math.random() * characters.length);
-newpassword += characters[randomIndex];
-}
-console.log("Password :", newpassword);
-
-// Send the new password to the backend
-fetch('https://projectbackend-fndm.onrender.com/send-email', {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json'
-},
-body: JSON.stringify({ newpassword, userId: 'theUserID' })
-})
-.then(response => response.json())
-.then(data => {
-console.log('Email sent successfully with new Password', data);
-})
-.catch((error) => {
-console.error('Error updating password:', error);
-});
-}
+        function passwordGenerateUpdate() {
+              const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
+              const passwordLength = Math.floor(Math.random() * 3) + 8; // Random length between 8 to 10 random characters from list above
+              let newpassword = '';
+              for (let i = 0; i < passwordLength; i++) {
+                    const randomIndex = Math.floor(Math.random() * characters.length);
+                    newpassword += characters[randomIndex];
+              }
+              return newpassword; 
+        }
 </script>
 </body>
 <footer>

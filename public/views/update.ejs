@@ -117,9 +117,8 @@
           headers: {
               'Content-Type': 'application/json'
           },
-              body: JSON.stringify({ username: username, email: updatedEmail, phoneno: updatedPhoneno })
+              body: JSON.stringify({ username: username, password: updatedPassword, email: updatedEmail, phoneno: updatedPhoneno })
           });
-              console.log(username);
               const data = await response.json();
               if (response.ok) {
                   alert('User ' + username + ' updated successfully');
