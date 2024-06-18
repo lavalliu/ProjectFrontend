@@ -188,7 +188,7 @@
             }
             try {
                   const hashedPassword = bcrypt.hash(password, 10);
-                  User.findByIdAndUpdate(username, { password: hashedPassword });
+                  User.findByIdAndUpdate(userId, { password: hashedPassword });
                   console.log('Password updated successfully.');
             } catch (error) {
                   console.error('Error updating password:', error);

@@ -3,6 +3,7 @@ const fastify = require('fastify')({ logger: true });
 const path = require('path'); // hint from Akash :) 
 const app = express();
 const bodyParser = require("body-parser");
+const bcrypt = require('bcryptjs');
 
 const PORT = process.env.PORT || 3000;
 
