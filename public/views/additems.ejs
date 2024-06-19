@@ -34,18 +34,29 @@
         </div>
       </nav>
 </head >
-<!-- <script> -->
-<!-- MENU ITEMS LIST -->
-
 <section class="about" id="about">
   <br><br><br>
   <div class="title">
     <h1 class="text-center">Add Menu Items</h1>
     <br>
       <form id="menuItemsForm">
+            <div class="col-3">
+                  <label class="form-control">Item Name</label>
+            </div>
+            <div class="col-2">
+                  <label class="form-control">Group</label>
+            </div>
+            <div class="col-4">
+                  <label class="form-control">Description</label>
+            </div>
+            <div class="col-2">
+                  <label class="form-control">Price</label>
+            </div>
+            <div class="col-1">
+                  <label class="form-control">Active</label>
+            </div>
       <!-- Menu items will be inserted here by JavaScript -->
       </form>
-      <!-- <div class="d-flex justify-content-between"> -->
       <div class="d-flex justify-content-center gap-5">
           <button type="button" class="btn btn-primary" id="addNewItem">Add New Item</button>
           <button type="button" class="btn btn-primary" id="saveButton">Save Changes</button>
@@ -71,7 +82,15 @@
                   <input type="text" class="form-control" placeholder="Item Name" data-field="itemname">
                   </div>
                   <div class="col-2">
-                  <input type="text" class="form-control" placeholder="Group" data-field="group">
+                  <select class="form-control" placeholder="Group" data-field="group">
+                  <option selected>Starters</option>
+                  <option>Main Course</option>
+                  <option>Desserts</option>
+                  <option>Soft</option>
+                  <option>Cocktails</option>
+                  <option>Aperitifs</option>
+                  <option>Hot</option>
+                  <option>Wine</option>
                   </div>
                   <div class="col-4">
                   <input type="text" class="form-control" placeholder="Description" data-field="description">

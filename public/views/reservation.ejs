@@ -74,32 +74,32 @@
       <br>
       <div class="reservations-container">
           <form id="resaForm">
-            <!-- <form id="resaForm" onsubmit="return validateForm()"> -->
           <div class="row g-3">
             <div class="row mb-3">
               <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
               <div class="col-md-4">
-              <span id="inputUsername" class="form-control-plaintext"></span>
+                <span id="inputUsername" class="form-control"></span>
               </div>
               <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
               <div class="col-md-4">
-                <input type="email" class="form-control" id="inputEmail" data-field="email">
+                <span id="inputEmail" class="form-control"></span>
               </div>
             </div>
             <div class="row mb-3">
               <label for="inputFirstname" class="col-sm-2 col-form-label">First Name</label>
               <div class="col-md-4">
-                <input type="text" class="form-control" id="inputFirstname" data-field="fname">
+                <span id="inputFirstname" class="form-control"></span>
+                <!-- <input type="text" class="form-control" id="inputFirstname" data-field="fname"> -->
               </div>
               <label for="inputLastname" class="col-sm-2 col-form-label">Last Name</label>
               <div class="col-md-4">
-                <input type="text" class="form-control" id="inputLastname" data-field="lname">
+                <span id="inputLastname" class="form-control"></span>
               </div>
             </div>
             <div class="row mb-3">
-              <label for="inputPersons" class="col-sm-2 col-form-label">Number of persons</label>
+              <label for="inputPersons" class="col-sm-2 col-form-label">No. of persons</label>
               <div class="col-md-4">
-                <select id="inputPersons" class="form-select" pattern="[0-9]" data-field="pax">
+                <select id="inputPersons" class="form-select" data-field="pax">
                   <option selected>1</option>
                   <option>2</option>
                   <option>3</option>
@@ -113,7 +113,8 @@
               </div>
               <label for="inputPhone" class="col-sm-2 col-form-label">Phone Number</label>
               <div class="col-md-4">
-                <input type="tel" class="form-control" id="inputPhone" minlength="7" maxlength="8" data-field="'phoneno">
+                <!-- <input type="tel" class="form-control" id="inputPhone" minlength="7" maxlength="8" data-field="'phoneno"> -->
+                <span id="inputPhoneno" class="form-control"></span>
                 <!-- to insert pattern validation -->
               </div>            
             </div>
@@ -180,12 +181,36 @@
             let username;
 
             // Event Listener to display the username and fetch reservations
-            document.addEventListener('DOMContentLoaded', function() {
-                  username = localStorage.getItem('username');
-                  if (username) {
-                        const usernameElement = document.getElementById('inputUsername');
-                        usernameElement.textContent = username;
-                        displayResas(username);
+            document.addEventListener('DOMContentLoaded', async function() {
+                  const username = localStorage.getItem('username');
+                  try {
+                        const response = await fetch(`https://projectbackend-fndm.onrender.com/users/${username}`);
+                        const data = await response.json();
+                        console.log(data);
+                        const email = data.email;
+                        const lname = data.lname;
+                        const fname = data.fname;
+                        const phoneno = data.phoneno;
+                        console.log(email);
+                        console.log(lname);
+                        console.log(fname);
+                        console.log(phoneno);
+
+                        if (username) {
+                              const usernameElement = document.getElementById('inputUsername');
+                              const emailElement = document.getElementById('inputEmail');
+                              const fnameElement = document.getElementById('inputFirstname');
+                              const lnameElement = document.getElementById('inputLastname');
+                              const phonenoElement = document.getElementById('inputPhoneno');
+                              usernameElement.textContent = username;
+                              emailElement.textContent = email;
+                              fnameElement.textContent = fname;
+                              lnameElement.textContent = lname;
+                              phonenoElement.textContent = phoneno;
+                              displayResas(username);
+                        }
+                  } catch (error) {
+                        console.error('Failed to fetch reservations:', error);
                   }
             });
 

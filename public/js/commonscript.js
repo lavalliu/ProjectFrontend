@@ -14,6 +14,10 @@ function logout() {
     localStorage.removeItem('myResaData');
     localStorage.removeItem('orders');
     localStorage.removeItem('username');
+    localStorage.removeItem('email');
+    localStorage.removeItem('lname');
+    localStorage.removeItem('fname');
+    localStorage.removeItem('phoneno');
     window.location.href = '/index';
 }
 

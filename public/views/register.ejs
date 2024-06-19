@@ -92,6 +92,17 @@
                 <input type="password" class="form-control" placeholder="Retype Password" id="password2" required>
               </div>
             </div>
+
+            <div class="row mb-3">
+              <label for="fname" class="col-sm-2 col-form-label">First Name</label>
+              <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Enter First Name" maxlength="20" id="fname" required>
+              </div>
+              <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
+              <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Enter Last Name" maxlength="50" id="lname" required>
+              </div>
+            </div>
             
             <div class="row mb-3">
               <label for="email" class="col-sm-2 col-form-label">Email</label>
@@ -117,6 +128,8 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const password2 = document.getElementById('password2').value;
+            const fname = document.getElementById('fname').value;
+            const lname =  document.getElementById('lname').value;
             const email = document.getElementById('email').value;       
             const phoneno = document.getElementById('phoneno').value;
             const role = 'client';
@@ -129,12 +142,13 @@
                       headers: {
                       'Content-Type': 'application/json'
                       },
-                      body: JSON.stringify({ username, password, email, phoneno, role })
+                      body: JSON.stringify({ username, password, fname, lname, email, phoneno, role })
                   });
                   const data = await response.json();
                   if (response.ok) {
-                      alert('User ' + data.user.username + ' registered Sucessfully');
-                      window.location.href = '/login'; 
+                        localStorage.setItem('username', data.user.username);
+                      alert('User ' + data.user.username + ' registered Sucessfully and you are now logged in. You may make a Reservation and order now');
+                      window.location.href = '/reservation'; 
                   } else {
                       alert('Error: ' + data.message);
                   }
