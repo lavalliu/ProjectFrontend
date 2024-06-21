@@ -295,6 +295,9 @@ h4 {
 .row .mb-3{
     margin-bottom: 1px;
 }
+.header {
+    font-weight: bold;
+}
 .col-description {
     flex: 0 0 auto;
     width: 55%; 

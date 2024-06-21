@@ -75,66 +75,70 @@
     <div class="reservations-container">
       <form id="resaForm">
         <div class="row g-3">
-              <div class="row mb-3">
-                <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
-                <div class="col-md-4">
-                <span id="inputUsername" class="form-control-plaintext"></span>
-                </div>
-                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                <div class="col-md-4">
-                  <input type="email" class="form-control" id="inputEmail" data-field="email">
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label for="inputFirstname" class="col-sm-2 col-form-label">First Name</label>
-                <div class="col-md-4">
-                  <input type="text" class="form-control" id="inputFirstname" data-field="fname">
-                </div>
-                <label for="inputLastname" class="col-sm-2 col-form-label">Last Name</label>
-                <div class="col-md-4">
-                  <input type="text" class="form-control" id="inputLastname" data-field="lname">
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label for="inputPersons" class="col-sm-2 col-form-label">Number of persons</label>
-                <div class="col-md-4">
-                  <select id="inputPersons" class="form-select" pattern="[0-9]" data-field="pax">
-                    <option selected>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                  </select>
-                </div>
-                <label for="inputPhone" class="col-sm-2 col-form-label">Phone Number</label>
-                <div class="col-md-4">
-                  <input type="tel" class="form-control" id="inputPhone" minlength="7" maxlength="8" data-field="'phoneno">
-                </div>            
-              </div>
-              <div class="row mb-3">
-                <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
-                <div class="col-md-4">
-                  <input type="Date" class="form-control" id="inputDate" data-field="date">
-                </div>
-                <label for="inputTime" class="col-sm-2 col-form-label">Time</label>
-                <div class="col-md-4">
-                  <input type="Time" class="form-control" id="inputTime" value="11:00" data-field="time">
-                </div>
-              </div>
-              <br>
-              <div class="row mb-3">
-                <label for="inputOther" class="col-sm-2 col-form-label">Other instructions or allergies</label>
-                <div class="col-md-4">
-                  <textarea class="form-control" id="inputOther" rows="3"></textarea>
-                </div>      
-              </div>
-              <div class="resamsg">
-                <button type="submit" id="saveResa" class="btn btn-primary" >Table booking completed, you may proceed to order by going on the respective menus and selecting the dish you want</button>
-              </div>    
+          <div class="row mb-3">
+            <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-md-4">
+              <span id="inputUsername" class="form-control"></span>
+            </div>
+            <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-md-4">
+              <span id="inputEmail" class="form-control"></span>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputFirstname" class="col-sm-2 col-form-label">First Name</label>
+            <div class="col-md-4">
+              <span id="inputFirstname" class="form-control"></span>
+            </div>
+            <label for="inputLastname" class="col-sm-2 col-form-label">Last Name</label>
+            <div class="col-md-4">
+              <span id="inputLastname" class="form-control"></span>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputPersons" class="col-sm-2 col-form-label">No. of persons</label>
+            <div class="col-md-4">
+              <select id="inputPersons" class="form-select" onchange="updateFormData()" data-field="pax">
+                <option selected>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+              </select>
+            </div>
+            <label for="inputPhoneno" class="col-sm-2 col-form-label">Phone Number</label>
+            <div class="col-md-4">
+              <span id="inputPhoneno" class="form-control"></span>
+            </div>            
+          </div>
+          <div class="row mb-3">
+            <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
+            <div class="col-md-4">
+              <input type="Date" class="form-control" id="inputDate" onchange="updateFormData()" data-field="date">
+            </div>
+            <label for="inputTime" class="col-sm-2 col-form-label">Time</label>
+            <div class="col-md-4">
+              <input type="Time" class="form-control" id="inputTime" value="11:00" onchange="updateFormData()" data-field="time">
+            </div>
+          </div>
+          <br>
+          <div class="row mb-3">
+            <label for="inputOther" class="col-sm-2 col-form-label">Other instructions or allergies</label>
+            <div class="col-md-4">
+              <textarea class="form-control" id="inputOther" onchange="updateFormData()" rows="3"></textarea>
+            </div>   
+            <label for="inputTakeout" class="col-sm-2 col-form-label">Takeout</label>
+            <div class="col-md-4">
+              <input type="checkbox" id="inputTakeout" onchange="updateFormData()" value="yes">
+            </div>   
+          </div>
+          <div class="resamsg">
+            <button type="submit" id="saveResa" class="btn btn-primary" >Table booking completed, you may proceed to order by going on the respective menus and selecting the dish you want</button>
+          </div>    
         </div>
       </form>
     </div>
@@ -144,35 +148,14 @@
 <div class="footer">
   <p>L.Liu @2023</p>
 </div>
+<script src="/js/resascript.js"></script>
 <script src="/js/commonscript.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script>
-      //Event Listener to display the username
-      document.addEventListener('DOMContentLoaded', function() {
-          // Retrieve username from localStorage
-          const username = localStorage.getItem('username');
-          if (username) {
-              const usernameElement = document.getElementById('inputUsername');
-              usernameElement.textContent = username;
+      let username;
+      let id='displayresa';
 
-          }
-       });
-
-      function displayFormData() {
-            // Retrieve the data from localStorage and set in the form elements
-            var savedData = localStorage.getItem('myResaData');
-            var dataObject = JSON.parse(savedData);
-            document.getElementById('inputEmail').value = dataObject.email;
-            document.getElementById('inputFirstname').value = dataObject.fname;
-            document.getElementById('inputLastname').value = dataObject.lname;
-            document.getElementById('inputPersons').value = dataObject.pax;
-            document.getElementById('inputPhone').value = dataObject.phoneno;
-            document.getElementById('inputDate').value = dataObject.date;
-            document.getElementById('inputTime').value = dataObject.time;
-            document.getElementById('inputOther').value = dataObject.other; 
-      }
-      window.onload = displayFormData;
 </script>
 </body>
 </html>

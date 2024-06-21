@@ -1,23 +1,17 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    const reserveTableLink = document.querySelector('a.nav-link[href="/login"]');
-    reserveTableLink.addEventListener('click', function(event) {
-                event.preventDefault();
-                if (localStorage.getItem('username')) {
-                    window.location.href = '/user';
-                } else {
-                    window.location.href = '/login';
-                }
-    });
-});
+// document.addEventListener('DOMContentLoaded', (event) => {
+//     const reserveTableLink = document.querySelector('a.nav-link[href="/login"]');
+//     reserveTableLink.addEventListener('click', function(event) {
+//                 event.preventDefault();
+//                 if (localStorage.getItem('username')) {
+//                     window.location.href = '/user';
+//                 } else {
+//                     window.location.href = '/login';
+//                 }
+//     });
+// });
     
 function logout() {
-    localStorage.removeItem('myResaData');
-    localStorage.removeItem('orders');
-    localStorage.removeItem('username');
-    localStorage.removeItem('email');
-    localStorage.removeItem('lname');
-    localStorage.removeItem('fname');
-    localStorage.removeItem('phoneno');
+    localStorage.clear();
     window.location.href = '/index';
 }
 
@@ -40,10 +34,10 @@ function displayWelcomeMessageAndHandleLogout() {
     // Check if orders exist in localStorage
     if (localStorage.getItem('myResaData')) {
         myorderDisp.style.display = 'block';
-        myResa.style.display ='none';
+        // myResa.style.display ='none';
     } else {
         myorderDisp.style.display = 'none';
-        myResa.style.display ='block';
+        // myResa.style.display ='block';
     }
 }
 

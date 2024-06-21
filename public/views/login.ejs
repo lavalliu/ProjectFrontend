@@ -107,6 +107,7 @@
                 });
                 const data = await response.json();
                 if (response.ok) {
+                    localStorage.clear();
                     localStorage.setItem('username', data.user.username);
                     alert('User ' + data.user.username + ' logged in sucessfully');
                     window.location.href = '/user'; 

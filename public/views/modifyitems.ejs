@@ -41,9 +41,55 @@
   <div class="title">
     <h1 class="text-center">Modify Menu Items</h1>
     <br>
-      <form id="menuItemsForm">
-      <!-- Menu items will be inserted here by JavaScript -->
-      </form>
+    <form id="menuItemsForm">
+      <div class="row">
+            <div class="col-3">
+                  <label class="header form-control" contenteditable="true">Item Name</label>
+            </div>
+            <div class="col-2">
+                  <label class="header form-control" contenteditable="true">Group</label>
+            </div>
+            <div class="col-4">
+                  <label class="header form-control" contenteditable="true">Description</label>
+            </div>
+            <div class="col-2">
+                  <label class="header form-control">Price</label>
+            </div>
+            <div class="col-1">
+                  <label class="header form-control" contenteditable="true">Active</label>
+            </div>
+      </div>
+      <div class="row">
+            <div class="col-3">
+                  <input type="text" class="form-control search-input" data-field="itemname" placeholder="Search by Item Name">
+            </div>
+            <div class="col-2">
+                  <select class="form-control" placeholder="Group" data-field="group" placeholder="Search by Group">
+                        <option selected></option>
+                        <option>Starters</option>
+                        <option>Main Course</option>
+                        <option>Desserts</option>
+                        <option>Soft</option>
+                        <option>Cocktails</option>
+                        <option>Aperitifs</option>
+                        <option>Hot</option>
+                        <option>Wine</option>
+                  </select>
+            </div>
+
+            <div class="col-4">
+                  <input type="text" class="form-control search-input" data-field="description" placeholder="Search by Description">
+            </div>
+            <div class="col-2">
+                  <!-- <label type="text" class="form-control"> -->
+            </div>
+            <div class="col-1">
+                  <input type="text" class="form-control search-input" data-field="status" placeholder="Search by status">
+            </div>
+      </div>
+      <br>
+    <!-- Menu items will be inserted here by JavaScript -->
+    </form>
       <!-- <div class="d-flex justify-content-between"> -->
       <div class="d-flex justify-content-center gap-5">
           <button type="button" class="btn btn-primary" id="saveButton">Save Changes</button>
@@ -59,6 +105,20 @@
       <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
       <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
       <script>
+            document.querySelectorAll('.search-input').forEach(input => {
+                  input.addEventListener('input', function() {
+                        const field = input.getAttribute('data-field');
+                        const searchValue = input.value.toLowerCase();
+
+                        const rows = document.querySelectorAll('#menuItemsForm .row');
+                        rows.forEach(row => {
+                              const value = row.querySelector(`[data-field="${field}"]`).value.toLowerCase();
+                              row.style.display = value.includes(searchValue) ? '' : 'none';
+                        });
+                  });
+            });
+
+
             // function to create list of existing items in the DB
             function createMenuItemRow(menuItem, index) {
                   const itemno = menuItem.itemno ?? 'No item number';
@@ -68,23 +128,28 @@
                   const price = menuItem.price ?? '0';
                   const status = menuItem.status ?? false;
                   const checkedAttribute = status ? 'checked' : ''; 
+                  const groups = ['Starters', 'Main Course', 'Desserts', 'Soft', 'Cocktails', 'Aperitifs', 'Hot', 'Wine'];
+                  let groupOptions = groups.map(group => {
+                        return `<option value="${group}" ${group === menuItem.group ? 'selected' : ''}>${group}</option>`;
+                  }).join('');
                   return `
-                  <div class="mb-3 row" data-itemno="${itemno}">
+                  <div class="mb-3" data-itemno="${itemno}"></div>
                   <div class="col-3">
-                  <input type="text" class="form-control" value="${itemname}" data-field="itemname">
+                        <input type="text" class="form-control" value="${itemname}" data-field="itemname">
                   </div>
                   <div class="col-2">
-                  <input type="text" class="form-control" value="${group}" data-field="group">
+                        <select class="form-control" data-field="group">
+                        ${groupOptions}
+                        </select>
                   </div>
                   <div class="col-4">
-                  <input type="text" class="form-control" value="${description}" data-field="description">
+                        <input type="text" class="form-control" value="${description}" data-field="description">
                   </div>
                   <div class="col-2">
-                  <input type="number" class="form-control" value="${price}" data-field="price">
+                        <input type="number" class="form-control" value="${price}" data-field="price">
                   </div>
                   <div class="col-1">
-                  <input type="checkbox" class="form-check-input" ${checkedAttribute} data-field="status">
-                  </div>
+                        <input type="checkbox" class="form-check-input" ${checkedAttribute} data-field="status">
                   </div>
                   `;
             }
