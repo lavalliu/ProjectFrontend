@@ -1,22 +1,20 @@
-return `
-<div class="mb-3 row" data-itemno="${itemno}">
-<div class="col-3">
-<input type="text" class="form-control" value="${itemname}" data-field="itemname">
+
+<div class="row password-wrapper">
+    <div class="col-md-6">
+    <label for="password" class="form-label">Password</label>
+    <div class="input-group">
+    <input type="password" class="form-control" placeholder="Enter password" id="password" required>
+    </div>
+    </div>
+    <div class="col-md-6">
+    <label for="retypePassword" class="form-label">Retype Password</label>
+    <div class="input-group">
+    <input type="password" class="form-control" placeholder="Retype password" id="retypePassword" required>
+    <span class="input-group-append">
+    <span class="input-group-text">
+    <i class="fa fa-eye" id="togglePasswords"></i>
+</span>
+</span>
 </div>
-<div class="col-2">
-<select class="form-control" data-field="group">
-${groupOptions}
-</select>
-</div>
-<div class="col-4">
-<input type="text" class="form-control" value="${description}" data-field="description">
-</div>
-<div class="col-2">
-<input type="number" class="form-control" value="${price}" data-field="price">
-</div>
-<div class="col-1">
-<input type="checkbox" class="form-check-input" ${checkedAttribute} data-field="status">
 </div>
 </div>
-`;
-}

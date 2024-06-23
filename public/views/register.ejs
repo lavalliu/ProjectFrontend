@@ -135,7 +135,7 @@
             const role = 'client';
             
             if (password !== password2) {
-                alert('Password does not match, please retry')
+                alert('Password does not match, please retry');
             } else {
                   const response = await fetch('https://projectbackend-fndm.onrender.com/users/register', {
                       method: 'POST',

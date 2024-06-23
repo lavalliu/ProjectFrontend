@@ -284,7 +284,7 @@ h4 {
 .icon-text {
     transition: font-weight 0.5s ease;
 }
-.icon-text:hover {
+.icon-text:hover, .password-wrapper .input-group-text {
     font-weight: bold;
     cursor: pointer;
 }
@@ -340,4 +340,13 @@ h4 {
 .filter-container {
     text-align: center;
     margin: auto;
+}
+.input-group .input-group-append .input-group-text {
+    border-left: 0;
+}
+.input-group-text {
+    height: 100%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
