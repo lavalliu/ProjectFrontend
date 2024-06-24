@@ -1,20 +1,49 @@
-
-<div class="row password-wrapper">
-    <div class="col-md-6">
-    <label for="password" class="form-label">Password</label>
-    <div class="input-group">
-    <input type="password" class="form-control" placeholder="Enter password" id="password" required>
-    </div>
-    </div>
-    <div class="col-md-6">
-    <label for="retypePassword" class="form-label">Retype Password</label>
-    <div class="input-group">
-    <input type="password" class="form-control" placeholder="Retype password" id="retypePassword" required>
-    <span class="input-group-append">
-    <span class="input-group-text">
-    <i class="fa fa-eye" id="togglePasswords"></i>
-</span>
-</span>
-</div>
-</div>
-</div>
+document.getElementById('saveButton').addEventListener('click', function() {
+    const rows = document.querySelectorAll('#menuItemsForm .row');
+    const items = Array.from(rows).map(row => {
+    // Initialize an object to hold the item data
+    const itemData = {
+    itemno: row.getAttribute('data-itemno'),
+    };
+    
+    // Helper function to safely query and assign values
+    const safeQuery = (selector, attr) => {
+    const element = row.querySelector(selector);
+    if (element) {
+    return attr === 'checked' ? element.checked : element.value;
+    } else {
+    console.error(`Element not found for selector: ${selector}`, row);
+    return attr === 'checked' ? false : ''; // Provide default values
+    }
+    };
+    
+    // Use the helper function to query for each field
+    itemData.itemname = safeQuery('[data-field="itemname"]', 'value');
+    itemData.group = safeQuery('[data-field="group"]', 'value');
+    itemData.description = safeQuery('[data-field="description"]', 'value');
+    itemData.price = safeQuery('[data-field="price"]', 'value');
+    itemData.status = safeQuery('[data-field="status"]', 'checked');
+    
+    return itemData;
+    });
+    
+    fetch('https://projectbackend-fndm.onrender.com/items/updateItems', { 
+    method: 'PUT',
+    headers: {
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ items: items }) 
+    })
+    .then(response => response.json())
+    .then(data => {
+    if(data.message === 'All menu items updated successfully') {
+    alert('Menu items updated successfully!');
+    window.location.href = '/user';
+    } else {
+    alert('Failed to update menu items.');
+    }
+    })
+    .catch(error => {
+    console.error('Error:', error);
+    });                         
+    });

@@ -50,11 +50,11 @@
                   <div class="col-4">
                         <label class="header form-control">Description</label>
                   </div>
-                  <div class="col-2">
+                  <div class="col-1">
                         <label class="header form-control">Price</label>
                   </div>
-                  <div class="col-1">
-                        <label class="header form-control">Active</label>
+                  <div class="col-2">
+                        <label class="header form-control">Active/Inactive</label>
                   </div>
             </div>
             <br>
@@ -78,7 +78,7 @@
         document.getElementById('addNewItem').addEventListener('click', function() {
                   const form = document.getElementById('menuItemsForm');
                   const div = document.createElement('div');
-                  div.className = 'mb-3 row';
+                  div.className = 'mb-3 row row1';
                   div.setAttribute('data-new', ''); // Mark the row as new
                   div.innerHTML = `
                   <div class="col-3">
@@ -99,10 +99,10 @@
                   <div class="col-4">
                         <input type="text" class="form-control" placeholder="Description" data-field="description">
                   </div>
-                  <div class="col-2">
+                  <div class="col-1">
                         <input type="number" class="form-control" placeholder="Price" data-field="price">
                   </div>
-                  <div class="col-1">
+                  <div class="col-2 checkbox-container">
                         <input type="checkbox" class="form-check-input" data-field="status">
                   </div>
                   `;
