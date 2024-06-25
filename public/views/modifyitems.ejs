@@ -112,8 +112,8 @@
                         const description = row.querySelector('input[data-field="description"]').value.toLowerCase();
                         const group = row.querySelector('select[data-field="group"]').options[row.querySelector('select[data-field="group"]').selectedIndex].text.toLowerCase();
                         const status = row.querySelector('input[data-field="status"][type="checkbox"]').checked;
-                        const matchText = itemName.startsWith(searchText);
-                        const matchDescription = description.startsWith(searchDescription);
+                        const matchText = itemName.includes(searchText);
+                        const matchDescription = description.includes(searchDescription);
                         const matchGroup = group.startsWith(searchGroup);
                         const matchStatus = (status === searchStatus);
                         row.style.display = (matchText && matchDescription && matchGroup && matchStatus) ? '' : 'none';
