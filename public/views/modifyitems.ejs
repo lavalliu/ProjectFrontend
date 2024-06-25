@@ -105,12 +105,12 @@
                   const rows = document.querySelectorAll('#menuItemsForm .row:not(:first-child)');
                   const searchText = document.querySelector('input[data-field="itemname"]').value.toLowerCase();
                   const searchDescription = document.querySelector('input[data-field="description"]').value.toLowerCase();
-                  const searchGroup = document.querySelector('select[data-field="group"]').options[document.querySelector('select[data-field="group"]').selectedIndex];
+                  const searchGroup = document.querySelector('select[data-field="group"]').options[document.querySelector('select[data-field="group"]').selectedIndex].value.toLowerCase();
                   const searchStatus = document.querySelector('input[data-field="status"][type="checkbox"]').checked;
                   rows.forEach(row => {
                         const itemName = row.querySelector('input[data-field="itemname"]').value.toLowerCase();
                         const description = row.querySelector('input[data-field="description"]').value.toLowerCase();
-                        const group = row.querySelector('select[data-field="group"]').options[row.querySelector('select[data-field="group"]').selectedIndex];
+                        const group = row.querySelector('select[data-field="group"]').options[row.querySelector('select[data-field="group"]').selectedIndex].value.toLowerCase();
                         const status = row.querySelector('input[data-field="status"][type="checkbox"]').checked;
                         const matchText = itemName.includes(searchText);
                         const matchDescription = description.includes(searchDescription);
