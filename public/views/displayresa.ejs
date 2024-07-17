@@ -10,59 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
     <link href="/css/style.css" rel="stylesheet">
 
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-sm navbar-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">ROYAL RESTAURANT</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/starters">Starter</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/maincourse">Main Course</a>
-        </li>			
-        <li class="nav-item">
-          <a class="nav-link" href="/desserts">Desserts</a>
-        </li>	
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Beverage
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="dropdown-item" href="/soft">Soft</a></li>
-            <li><a class="dropdown-item" href="/cocktails">Cocktails</a></li>
-            <li><a class="dropdown-item" href="/aperitifs">Aperitifs</a></li>
-            <li><a class="dropdown-item" href="/hot">Hot Beverage</a></li>
-            <li><a class="dropdown-item" href="/wine">Wine</a></li>
-          </ul>
-        </li>
-        </ul>		
-      </div>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item" id="cartIcon">
-            <a href="/order" class="nav-link" id="myorder">My Order(<span id="cartCount">0</span>)</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"><span id="usernameDisplay"></span></a>
-          </li>			
-          <li class="nav-item">
-            <a class="nav-link" id="logout" href="/">Logout</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/about">About</a>
-          </li>			
-          <li class="nav-item">
-              <a class="nav-link" href="/contact">Contact</a>
-          </li>	
-        </ul>
-      </div>
-   </div>
-  </nav>
+    <!-- NAVBAR -->
+    <%- include('partials/navbar') %>
     
 </head>
 <body>
@@ -78,21 +27,21 @@
           <div class="row mb-3">
             <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
             <div class="col-md-4">
-              <span id="inputUsername" class="form-control"></span>
+              <span id="inputUsername" class="form-control display-field"></span>
             </div>
             <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
             <div class="col-md-4">
-              <span id="inputEmail" class="form-control"></span>
+              <span id="inputEmail" class="form-control display-field"></span>
             </div>
           </div>
           <div class="row mb-3">
             <label for="inputFirstname" class="col-sm-2 col-form-label">First Name</label>
             <div class="col-md-4">
-              <span id="inputFirstname" class="form-control"></span>
+              <span id="inputFirstname" class="form-control display-field"></span>
             </div>
             <label for="inputLastname" class="col-sm-2 col-form-label">Last Name</label>
             <div class="col-md-4">
-              <span id="inputLastname" class="form-control"></span>
+              <span id="inputLastname" class="form-control display-field"></span>
             </div>
           </div>
           <div class="row mb-3">
@@ -131,7 +80,7 @@
             <div class="col-md-4">
               <textarea class="form-control" id="inputOther" onchange="updateFormData()" rows="3"></textarea>
             </div>   
-            <label for="inputTakeout" class="col-sm-2 col-form-label">Takeout</label>
+            <label for="inputTakeout" class="col-sm-2 col-form-label">Take Away</label>
             <div class="col-md-4">
               <input type="checkbox" id="inputTakeout" onchange="updateFormData()" value="yes">
             </div>   

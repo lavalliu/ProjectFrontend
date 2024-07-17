@@ -3,10 +3,15 @@ const fastify = require('fastify')({ logger: true });
 const path = require('path'); // hint from Akash :) 
 const app = express();
 const bodyParser = require("body-parser");
+// require('dotenv').config({ path: 'project.env' });
 const bcrypt = require('bcryptjs');
 
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 
+// const backendUrl = process.env.BACKEND_URL;
+// const emailAddress = process.env.EMAIL_ADDRESS;
+
+// module.exports = {backendUrl};
 
 app.use(bodyParser.json()); // parse requests of content-type - application/json
 app.use(bodyParser.urlencoded({ extended: true })); // parse requests of content-type - application/x-www-form-urlencoded
@@ -73,6 +78,10 @@ app.get("/maincourse", (req, res) => {
   res.render("maincourse.ejs");
 });
 
+app.get("/loginadmin", (req, res) => {
+  res.render("loginadmin.ejs");
+});
+
 app.get("/modifyitems", (req, res) => {
   res.render("modifyitems.ejs");
 });
@@ -115,6 +124,10 @@ app.get("/user", (req, res) => {
 
 app.get("/wine", (req, res) => {
   res.render("wine.ejs");
+});
+
+app.get("/aboutmini", (req, res) => {
+  res.render("aboutmini.ejs");
 });
 
 const port = 3001;

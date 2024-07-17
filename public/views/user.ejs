@@ -10,68 +10,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
     <link href="/css/style.css" rel="stylesheet"></link>
 
- <!-- NAVBAR -->
- <nav class="navbar navbar-expand-sm navbar-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">ROYAL RESTAURANT</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/starters">Starter</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/maincourse">Main Course</a>
-      </li>			
-      <li class="nav-item">
-        <a class="nav-link" href="/desserts">Desserts</a>
-      </li>	
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Beverage
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-          <li><a class="dropdown-item" href="/soft">Soft</a></li>
-          <li><a class="dropdown-item" href="/cocktails">Cocktails</a></li>
-          <li><a class="dropdown-item" href="/aperitifs">Aperitifs</a></li>
-          <li><a class="dropdown-item" href="/hot">Hot Beverage</a></li>
-          <li><a class="dropdown-item" href="/wine">Wine</a></li>
-        </ul>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="table"></a>
-      </li>	
-      </ul>		
-    </div>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item" id="cartIcon">
-          <a href="/order" class="nav-link" id="myorder"></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"><span id="usernameDisplay"></span></a>
-        </li>			
-        <li class="nav-item">
-          <a class="nav-link" id="logout" href="/">Logout</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
-        </li>			
-        <li class="nav-item">
-            <a class="nav-link" href="/contact">Contact</a>
-        </li>	
-      </ul>
-    </div>
- </div>
-</nav>
+    <!-- NAVBAR -->
+    <%- include('partials/navbar') %>
+    
     <br><br><br><br><br>
     <div class="login_container">
-      <div class="icon-item">
-        <img src="/images/user-284.svg" alt="Customer Profile">
-        <span class="icon-text" id="editProfile">Profile</span>
-      </div>
       <div class="icon-item" id="dynamicSection"></div>
     </div>
 </head >
@@ -132,13 +75,14 @@
                         });
                   }
             } else {
-                  dynamicSection.innerHTML = '<img src="/images/RestaurantTable.svg" alt="Table Reservation"><span class="icon-text" id="reserveTable">Reservation</span>';
-                  const reserveTable = document.getElementById('reserveTable');
-                  if (reserveTable) {
-                        reserveTable.addEventListener('click', function() {
-                              window.location.href = '/reservation';
-                        });
-                  }
+                  window.location.href = '/reservation';
+                  // dynamicSection.innerHTML = '<img src="/images/RestaurantTable.svg" alt="Table Reservation"><span class="icon-text" id="reserveTable">Reservation</span>';
+                  // const reserveTable = document.getElementById('reserveTable');
+                  // if (reserveTable) {
+                  //       reserveTable.addEventListener('click', function() {
+                  //             window.location.href = '/reservation';
+                  //       });
+                  // }
             }
       });
   </script>

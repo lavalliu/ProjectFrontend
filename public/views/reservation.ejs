@@ -10,59 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
     <link href="/css/style.css" rel="stylesheet">
 
-        <!-- NAVBAR -->
-        <nav class="navbar navbar-expand-sm navbar-dark">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="/">ROYAL RESTAURANT</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="/starters">Starter</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/maincourse">Main Course</a>
-              </li>			
-              <li class="nav-item">
-                <a class="nav-link" href="/desserts">Desserts</a>
-              </li>	
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Beverage
-                </a>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                  <li><a class="dropdown-item" href="/soft">Soft</a></li>
-                  <li><a class="dropdown-item" href="/cocktails">Cocktails</a></li>
-                  <li><a class="dropdown-item" href="/aperitifs">Aperitifs</a></li>
-                  <li><a class="dropdown-item" href="/hot">Hot Beverage</a></li>
-                  <li><a class="dropdown-item" href="/wine">Wine</a></li>
-                </ul>
-              </li>
-              </ul>		
-            </div>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav ms-auto">
-                <li class="nav-item" id="cartIcon">
-                  <a href="/order" class="nav-link" id="myorder"></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link"><span id="usernameDisplay"></span></a>
-                </li>			
-                <li class="nav-item">
-                  <a class="nav-link" id="logout" href="/">Logout</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/about">About</a>
-                </li>			
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact</a>
-                </li>	
-              </ul>
-            </div>
-         </div>
-        </nav>	
+    <!-- NAVBAR -->
+    <%- include('partials/navbar') %>
     
 </head>
 <body>
@@ -72,27 +21,32 @@
     <div class="title">
       <h1 class="text-center">My Reservation</h1>
       <br>
+      <div class="grid-container-about">
+        <a>Fill in the information regarding your reservation in the form below. Then click on 'Save this reservation' and proceed to choose your menu items to order.</a>
+        <br>
+    </div>
+    <br>
       <div class="reservations-container">
           <form id="resaForm">
           <div class="row g-3">
             <div class="row mb-3">
               <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
               <div class="col-md-4">
-                <span id="inputUsername" class="form-control"></span>
+                <span id="inputUsername" class="form-control display-field"></span>
               </div>
               <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
               <div class="col-md-4">
-                <span id="inputEmail" class="form-control"></span>
+                <span id="inputEmail" class="form-control display-field"></span>
               </div>
             </div>
             <div class="row mb-3">
               <label for="inputFirstname" class="col-sm-2 col-form-label">First Name</label>
               <div class="col-md-4">
-                <span id="inputFirstname" class="form-control"></span>
+                <span id="inputFirstname" class="form-control display-field"></span>
               </div>
               <label for="inputLastname" class="col-sm-2 col-form-label">Last Name</label>
               <div class="col-md-4">
-                <span id="inputLastname" class="form-control"></span>
+                <span id="inputLastname" class="form-control display-field"></span>
               </div>
             </div>
             <div class="row mb-3">
@@ -131,34 +85,24 @@
               <div class="col-md-4">
                 <textarea class="form-control" id="inputOther" rows="3"></textarea>
               </div>   
-              <label for="inputTakeout" class="col-sm-2 col-form-label">Takeout</label>
+              <label for="inputTakeout" class="col-sm-2 col-form-label">Take Away</label>
               <div class="col-md-4">
                 <input type="checkbox" id="inputTakeout" value="yes">
               </div>   
             </div>
             <div class="text-center">
-              <button type="submit" id="saveResa" class="btn btn-primary" >Save New Reservation</button>
+              <button type="submit" id="saveResa" class="btn btn-primary">Save this Reservation</button>
             </div>
             <div class="text-center">
-              <a class="btn btn-primary" >Existing reservation(s) below</a>
+              <a class="btn btn-primary" >If you already have existing reservation(s), they will be displayed below</a>
             </div>
             <table id="resasTable" class="resas">
-              <thead>
-                <tr>
-                  <th scope="col">Date</th>
-                  <th scope="col">Time</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Phone Number</th>
-                  <th scope="col">Pax</th>
-                  <th scope="col">Other Inst.</th>
-                  <th scope="col">Takeout</th>
-                  <th scope="col">Order Total</th>
-                </tr>
-              </thead>
-              <tbody>
-              <!-- Orders will be inserted here -->
-              </tbody>
+              <hr>
+              <table id="resasTable" class="resas">
+                <tbody>
+                <!-- Orders will be inserted here -->
+                </tbody>
+              </table>
             </table>
             </div>
           </form>
@@ -167,41 +111,41 @@
     <br><br><br><br>
   </section>    
 
-      <!-- footer here -->        
-      <div class="footer">
-        <p>L.Liu @2023</p>
-      </div>
-        <script src="/js/resascript.js"></script>
-        <script src="/js/commonscript.js"></script>
-        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-        <script>
-            let id='reservation';
+  <!-- footer here -->        
+  <div class="footer">
+    <p>L.Liu @2023</p>
+  </div>
+    <script src="/js/resascript.js"></script>
+    <script src="/js/commonscript.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        let id='reservation';
 
-            // Event Listener to Save a reservation
-            document.getElementById('resaForm').addEventListener('submit', function(event) {
-                  event.preventDefault(); 
-                  const usernameElement = document.getElementById('inputUsername'); 
-                  const fnameElement = document.getElementById('inputFirstname');
-                  const lnameElement = document.getElementById('inputLastname');
-                  const emailElement = document.getElementById('inputEmail');
-                  const phonenoElement = document.getElementById('inputPhoneno');
-                  const formData = {
-                        username: usernameElement.textContent,
-                        fname: fnameElement.textContent,
-                        lname: lnameElement.textContent,
-                        email: emailElement.textContent,
-                        phoneno: phonenoElement.textContent,
-                        date: document.getElementById('inputDate').value,
-                        time: document.getElementById('inputTime').value,
-                        takeout: document.getElementById('inputTakeout').checked,
-                        pax: document.getElementById('inputPersons').value,
-                        other: document.getElementById('inputOther').value,
-                  };
-                  alert('Reservation created successfully!');
-                  saveFormData(formData);
-                  window.location.href = '/displayresa';
-            });
-        </script>
+        // Event Listener to Save a reservation
+        document.getElementById('resaForm').addEventListener('submit', function(event) {
+              event.preventDefault(); 
+              const usernameElement = document.getElementById('inputUsername'); 
+              const fnameElement = document.getElementById('inputFirstname');
+              const lnameElement = document.getElementById('inputLastname');
+              const emailElement = document.getElementById('inputEmail');
+              const phonenoElement = document.getElementById('inputPhoneno');
+              const formData = {
+                    username: usernameElement.textContent,
+                    fname: fnameElement.textContent,
+                    lname: lnameElement.textContent,
+                    email: emailElement.textContent,
+                    phoneno: phonenoElement.textContent,
+                    date: document.getElementById('inputDate').value,
+                    time: document.getElementById('inputTime').value,
+                    takeout: document.getElementById('inputTakeout').checked,
+                    pax: document.getElementById('inputPersons').value,
+                    other: document.getElementById('inputOther').value,
+              };
+              alert('Reservation created successfully!');
+              saveFormData(formData);
+              window.location.href = '/starters';
+        });
+    </script>
 </body>
 </html>

@@ -3,7 +3,7 @@ html,h1{
     font-family: "Raleway";
     color: black;
 }
-body {
+body, .display-field {
     background-image: url(/images/background2.png);
 }
 .navbar {
@@ -12,6 +12,12 @@ body {
     position: fixed;
     height: 65px;
     z-index: 9;
+    /* height: 100px; */
+}
+.navbar-brand img {
+    height: auto; 
+    width: 100px; 
+    border: 1px solid black;
 }
 .right {
     color: white;
@@ -38,8 +44,7 @@ ul {
     color: white;
 }
 .nav-item :hover{
-    background-color: rgb(91, 153, 201);
-    ;
+    background-color: rgb(15, 72, 115);
 }
 .nav-link .nav-item a ul li .navbar-nav {
     display:inline;
@@ -52,14 +57,14 @@ ul {
 }
 .checkbox-container {
     display: flex;
-    justify-content: center; /* Horizontally center the content */
-    align-items: center; /* Vertically center the content */
-    height: 100%; /* Set the height to fill the container */
+    justify-content: center;
+    align-items: center; 
+    height: 100%; 
     width: 100;
 }
 .row1 {
     display: flex;
-    align-items: center; /* This will vertically center the children */
+    align-items: center; 
 }
 ul {
     list-style: none;
@@ -73,11 +78,11 @@ p {
 }
 h1 {
     font-size: 50px;
-    color: rgb(31, 92, 138);
+    color: rgb(11,158,208);
 }
 h2 {
     font-size: 25px;
-    color: rgb(31, 92, 138);
+    color: rgb(11,158,208);
 }
 section{
     align-items: center;
@@ -89,10 +94,12 @@ section{
 img {
     padding-top: 46px;
 }
-p {
+p, .logos {
     color: white;
 }
 .intouch {
+    align-items: center;
+    text-align: center;
     font-family: "Raleway";
     color: white;
     font-size: 30px;
@@ -106,7 +113,7 @@ p {
     position: relative;
     margin: auto;
 }
-.prev, .next {
+.prev, .next, .nextmenu, .prevmenu {
     cursor: pointer;
     position: absolute;
     top: 50%;
@@ -121,11 +128,30 @@ p {
     user-select: none;
     text-decoration: none;
 }
-.next {
+.next, .nextmenu {
     right: 0;
     border-radius: 3px 0 0 3px;
 }
-.prev:hover, .next:hover {
+.prev, .prevmenu {
+    left: 0;
+    border-radius: 3px 0 0 3px;
+}
+.nextmenu, .prevmenu {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9;
+    color: black;
+    font-size: 50px; 
+    visibility: visible;
+}
+.nextmenu {
+    margin-right: 50px;
+}
+.prevmenu {
+    margin-left: 50px;
+}
+.prev:hover, .next:hover, .nextmenu:hover, .prevmenu:hover {
     background-color: rgba(0,0,0,0.8);
     color: white;
 }
@@ -203,6 +229,7 @@ h4 {
 }
 .resas {
     width: 100%;
+    font-weight: bold;
 }
 .btn, .btnnoclick {
     background-color: rgb(11,158,208); 
@@ -225,17 +252,15 @@ h4 {
     background-color: rgb(11,158,208);
     color: white;
     width: 80%;
-    position: fixed;
-    top: 3.5%;
-    left: 50%;
     height: 10px;
-    transform: translate(-50%, -50%);
     z-index: 9;
     display: flex;
     margin: auto;
-}
-.col {
-    padding-bottom: 2%;
+    align-items: center;
+    position: relative; 
+    top: auto;
+    left: auto;
+    transform: none;
 }
 .grid-container-contact {  
     color: white;
@@ -258,7 +283,7 @@ h4 {
     padding: auto;
 }
 .grid-container-about {
-    width: 60%;
+    width: 40%;
     background-color: rgb(11,158,208); 
     color: white;
     font-size: 15px;
@@ -330,6 +355,7 @@ h4 {
     width: 35px; 
 }
 .total {
+    text-align: right;
     color: black;
 }
 .resamsg {
@@ -361,3 +387,30 @@ h4 {
     align-items: center;
     justify-content: center;
 }
+.cart-icon img {
+    width: 150px;
+    height: 150px;
+}
+.cartamount {
+    display: inline-block;
+    width: 20px; 
+    height: 20px; 
+    line-height: 20px; 
+    border-radius: 50%; 
+    text-align: center;
+    background-color: red; 
+    color: #ffffff; 
+}
+.cartamount:hover {
+    background-color: red;
+}
+.tbody:nth-child(1) {
+    font-weight: bold;
+}
+.bold-row td {
+    font-weight: bold;
+}
+.indented-orders {
+    margin-left: 100px; 
+    margin-right: 0;
+}    

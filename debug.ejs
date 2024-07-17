@@ -1,49 +1,305 @@
-document.getElementById('saveButton').addEventListener('click', function() {
-    const rows = document.querySelectorAll('#menuItemsForm .row');
-    const items = Array.from(rows).map(row => {
-    // Initialize an object to hold the item data
-    const itemData = {
-    itemno: row.getAttribute('data-itemno'),
-    };
-    
-    // Helper function to safely query and assign values
-    const safeQuery = (selector, attr) => {
-    const element = row.querySelector(selector);
-    if (element) {
-    return attr === 'checked' ? element.checked : element.value;
-    } else {
-    console.error(`Element not found for selector: ${selector}`, row);
-    return attr === 'checked' ? false : ''; // Provide default values
-    }
-    };
-    
-    // Use the helper function to query for each field
-    itemData.itemname = safeQuery('[data-field="itemname"]', 'value');
-    itemData.group = safeQuery('[data-field="group"]', 'value');
-    itemData.description = safeQuery('[data-field="description"]', 'value');
-    itemData.price = safeQuery('[data-field="price"]', 'value');
-    itemData.status = safeQuery('[data-field="status"]', 'checked');
-    
-    return itemData;
-    });
-    
-    fetch('https://projectbackend-fndm.onrender.com/items/updateItems', { 
-    method: 'PUT',
-    headers: {
-    'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ items: items }) 
-    })
-    .then(response => response.json())
-    .then(data => {
-    if(data.message === 'All menu items updated successfully') {
-    alert('Menu items updated successfully!');
-    window.location.href = '/user';
-    } else {
-    alert('Failed to update menu items.');
-    }
-    })
-    .catch(error => {
-    console.error('Error:', error);
-    });                         
-    });
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Project</title>
+
+<!-- LINK TO BOOTSTRAP  AND STYLESHEET -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+<link href="/css/style.css" rel="stylesheet">
+
+<!-- NAVBAR -->
+<%- include('partials/navbar') %>
+</head>
+<body>
+<section class="about" id="about">
+<div class="title">
+<br><br><br>
+<h1 class="text-center">List of Reservations</h1>
+<br>
+<div class="filter-container">
+<form id="filterForm">
+<label for="fromDateFilter">From:</label>
+<input type="date" id="fromDateFilter" name="fromDateFilter">
+<label for="toDateFilter">To:</label>
+<input type="date" id="toDateFilter" name="toDateFilter">
+<label for="nameFilter">Name:</label>
+<input type="text" id="nameFilter" name="nameFilter">
+<label for="takeoutFilter">Include Take Away</label>
+<input type="checkbox" id="takeoutFilter" name="takeoutFilter" checked>
+<label for="dineinFilter">Include Dine In</label>
+<input type="checkbox" id="dineinFilter" name="dineinFilter" checked>
+<label for="cancelFilter">Include Cancelled</label>
+<input type="checkbox" id="cancelFilter" name="cancelFilter">
+<button class="btn" type="submit">Display</button>
+<a href="/user">
+<button class="btn" type="button">Back to Admin Menu</button>
+</a>
+<a>
+<button class="btn" id="cancelResa" type="button">Cancel selected reservation(s)</button>
+</a>
+</form>
+</div>
+<div class="list-container">
+<table id="resasTable" class="resas">
+<tbody>
+<!-- Orders will be inserted here -->
+</tbody>
+</table>
+</div>
+</div>
+<br><br><br><br><br>
+</section>
+<div class="footer">
+<p>L.Liu @2023</p>
+</div>
+<script src="/js/commonscript.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+  displayAllResas();
+  
+  document.getElementById('fromDateFilter').valueAsDate = new Date();
+  
+  const filterForm = document.getElementById('filterForm');
+  filterForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  displayAllResasNoParam();
+  });
+  
+  function displayAllResasNoParam() {
+  const fromDate = document.getElementById('fromDateFilter').value;
+  const toDate = document.getElementById('toDateFilter').value;
+  const nameFilter = document.getElementById('nameFilter').value;
+  const takeoutFilter = document.getElementById('takeoutFilter').checked;
+  const cancelFilter = document.getElementById('cancelFilter').checked;
+  
+  // Clear the current reservations display
+  const resasTableBody = document.querySelector('#resasTable tbody');
+  resasTableBody.innerHTML = '';
+  
+  // Display reservations with the selected filters
+  displayAllResas(fromDate, toDate, takeoutFilter, cancelFilter, nameFilter);
+  }
+  
+  document.getElementById('cancelResa').addEventListener('click', async function() {
+  const checkboxes = document.querySelectorAll('.cancel-checkbox:checked');
+  const updates = [];
+  checkboxes.forEach(checkbox => {
+  const row = checkbox.closest('tr');
+  const reservationId = row.dataset.reservationId; // Use the reservation ID from the data attribute
+  updates.push(updateReservationStatus(reservationId, false));
+  });
+  await Promise.all(updates);
+  displayAllResasNoParam();
+  });
+  });
+  
+  async function displayAllResas(fromDate = null, toDate = null, takeoutFilter = null, cancelFilter = null, nameFilter = '') {
+  const resasTableBody = document.querySelector('#resasTable tbody');
+  if (!resasTableBody) {
+  console.error('The table body element was not found.');
+  return;
+  }
+  try {
+  const response = await fetch('https://projectbackend-fndm.onrender.com/reservations');
+  const data = await response.json();
+  const reservationsArray = data.resas;
+  if (!fromDate) {
+  fromDate = document.getElementById('fromDateFilter').value;
+  }
+  if (!toDate) {
+  toDate = "2100-12-31";
+  }
+  
+  // Filter the reservations based on the provided filters
+  let filteredReservations = [...reservationsArray]; // Create a new array to make sure there is no left out filtering
+  if (fromDate && toDate) {
+  const from = new Date(fromDate);
+  const to = new Date(toDate);
+  filteredReservations = filteredReservations.filter(resas => {
+  const resasDate = new Date(resas.date);
+  return resasDate >= from && resasDate <= to;
+  });
+  }
+  
+  if (nameFilter) {
+  filteredReservations = filteredReservations.filter(resas => {
+  const fullName = `${resas.fname} ${resas.lname}`.toLowerCase();
+  return fullName.includes(nameFilter.toLowerCase());
+  });
+  }
+  
+  const takeoutCheckbox = document.getElementById('takeoutFilter');
+  const dineinCheckbox = document.getElementById('dineinFilter');
+  // Convert checkbox checked state to boolean
+  const takeoutBoolean = takeoutCheckbox.checked;
+  const dineinBoolean = dineinCheckbox.checked;
+  filteredReservations = filteredReservations.filter(resas => {
+  // Convert resas.takeout to boolean
+  const resasTakeoutBoolean = resas.takeout;
+  // Include takeout orders if takeoutCheckbox is checked, and include dine-in orders if dinein Checkbox is checked
+  return (resasTakeoutBoolean && takeoutBoolean) || (!resasTakeoutBoolean && dineinBoolean);
+  });
+  
+  const cancelCheckbox = document.getElementById('cancelFilter');
+  const cancelBoolean = cancelCheckbox.checked;
+  filteredReservations = filteredReservations.filter(resas => {
+  const resasCancelBoolean = Boolean(resas.status);
+  return cancelBoolean || resasCancelBoolean;
+  });
+  
+  // Sort the reservations by date
+  filteredReservations.sort((a, b) => new Date(a.date) - new Date(b.date));
+  if (filteredReservations && filteredReservations.length > 0) {
+  let total = 0;
+  for (const resas of filteredReservations) {
+  const reservationTotal = resas.orders.reduce((sum, order) => sum + (order.quantity * order.price), 0);
+  total += reservationTotal;
+  const formattedDate = new Date(resas.date).toLocaleDateString('en-UK');
+  // Create a row for reservation header and details
+  const resasRow = document.createElement('tr');
+  const resasRowHdr = document.createElement('tr');
+  resasRow.dataset.reservationId = resas._id; // Assign the reservation ID to the data attribute
+  resasRowHdr.classList.add('bold-row');
+  resasRow.classList.add('bold-row');
+  resasRowHdr.innerHTML = `
+  <th scope="col">Username</th>
+  <th scope="col">Date</th>
+  <th scope="col">Time</th>
+  <th scope="col">Name</th>
+  <th scope="col">Email</th>
+  <th scope="col">Phone No.</th>
+  <th scope="col">Pax</th>
+  <th scope="col">Other</th>
+  <th scope="col">Take Away</th>
+  <th scope="col">Order Total</th>
+  <th scope="col">Cancel</th>
+  `;
+  resasTableBody.appendChild(resasRowHdr);
+  resasRow.innerHTML = `
+  <td>${resas.username}</td>
+  <td>${formattedDate}</td>
+  <td>${resas.time}</td>
+  <td>${resas.fname} ${resas.lname}</td>
+  <td>${resas.email}</td>
+  <td>${resas.phoneno}</td>
+  <td>${resas.pax}</td>
+  <td>${resas.other}</td>
+  <td>${resas.takeout ? 'Yes' : 'No'}</td>
+  <td>Rs${reservationTotal.toFixed(2)}</td>
+  `;
+  resasTableBody.appendChild(resasRow);
+  
+  const cancelCheckboxCell = document.createElement('td');
+  const cancelCheckbox = document.createElement('input');
+  cancelCheckbox.type = 'checkbox';
+  cancelCheckbox.className = 'cancel-checkbox';
+  cancelCheckbox.checked = !resas.status;
+  cancelCheckboxCell.appendChild(cancelCheckbox);
+  resasRow.appendChild(cancelCheckboxCell);
+  
+  // Create a row for orders if there are any
+  if (resas.orders.length > 0) {
+  const ordersRow = document.createElement('tr');
+  const ordersCell = document.createElement('td');
+  ordersCell.colSpan = 9; // Span across all columns
+  const ordersTable = document.createElement('table');
+  ordersTable.classList.add('orders-table', 'indented-orders');
+  
+  // Create the header row for orders
+  const headerRow = ordersTable.insertRow();
+  const headers = ['Menu name', 'Quantity', 'Unit Price', 'Line Total'];
+  headers.forEach(headerText => {
+  let headerCell = document.createElement('th');
+  headerCell.textContent = headerText;
+  headerRow.appendChild(headerCell);
+  });
+  
+  // Add orders to the orders table
+  for (const order of resas.orders) {
+  const itemName = await fetchItemDetails(order.itemno);
+  const row = ordersTable.insertRow();
+  let cell = row.insertCell();
+  cell.textContent = itemName;
+  cell = row.insertCell();
+  cell.textContent = order.quantity;
+  cell = row.insertCell();
+  cell.textContent = `Rs${order.price}`;
+  cell = row.insertCell();
+  const lineTotal = order.quantity * order.price;
+  cell.textContent = `Rs${lineTotal.toFixed(2)}`;
+  }
+  
+  ordersCell.appendChild(ordersTable);
+  ordersRow.appendChild(ordersCell);
+  resasTableBody.appendChild(ordersRow);
+  }
+  }
+  
+  // Update total amount display
+  const totalDisplay = document.getElementById('total');
+  if (totalDisplay) {
+  totalDisplay.textContent = `Total amount: Rs ${total.toFixed(2)}`;
+  }
+  } else {
+  resasTableBody.innerHTML = '<tr><td colspan="9">No reservations available.</td></tr>';
+  }
+  } catch (error) {
+  console.error('Failed to fetch reservations:', error);
+  }
+  }
+  
+  async function updateReservationStatus(reservationId, status) {
+  try {
+  const response = await fetch(`https://projectbackend-fndm.onrender.com/reservations/${reservationId}`, {
+  method: 'PUT',
+  headers: {
+  'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ status: status })
+  });
+  
+  if (!response.ok) {
+  throw new Error('Failed to update reservation status');
+  }
+  
+  const data = await response.json();
+  console.log('Reservation status updated:', data);
+  } catch (error) {
+  console.error('Error updating reservation status:', error);
+  }
+  }
+
+
+
+  for (const resas of filteredReservations) {
+const reservationTotal = resas.orders.reduce((sum, order) => sum + (order.quantity * order.price), 0);
+const formattedDate = new Date(resas.date).toLocaleDateString('en-UK');
+const resasRow = document.createElement('tr');
+resasRow.dataset.reservationId = resas._id; // Assign the reservation ID to the data attribute
+resasRow.innerHTML = `
+<td>${resas.username}</td>
+<td>${formattedDate}</td>
+<td>${resas.time}</td>
+<td>${resas.fname} ${resas.lname}</td>
+<td>${resas.email}</td>
+<td>${resas.phoneno}</td>
+<td>${resas.pax}</td>
+<td>${resas.other}</td>
+<td>${resas.takeout ? 'Yes' : 'No'}</td>
+<td>Rs${reservationTotal.toFixed(2)}</td>
+`;
+const cancelCheckboxCell = document.createElement('td');
+const cancelCheckbox = document.createElement('input');
+cancelCheckbox.type = 'checkbox';
+cancelCheckbox.className = 'cancel-checkbox';
+cancelCheckbox.checked = !resas.status;
+cancelCheckboxCell.appendChild(cancelCheckbox);
+resasRow.appendChild(cancelCheckboxCell);
+resasTableBody.appendChild(resasRow);
+}
+  </script>

@@ -1,3 +1,4 @@
+//Function to update orders in localstorage and call function to update cart on navbar
 function updateOrder(quantityField, itemno, price, remove = false) {
     let orders = JSON.parse(localStorage.getItem('orders')) || {};
     if (remove) {
@@ -9,6 +10,7 @@ function updateOrder(quantityField, itemno, price, remove = false) {
     updateOrderCounter();
 }
 
+//Function to update the Order counter on the Navbar
 function updateOrderCounter() {
     try {
           const orders = JSON.parse(localStorage.getItem('orders')) || {};
@@ -25,6 +27,7 @@ function updateOrderCounter() {
     }
 }
 
+//script to display the orders for the reservation
 document.addEventListener('DOMContentLoaded', (event) => {
     function createMenuItemRow(menuItem) {
           const itemno = menuItem.itemno ?? 'No item number';
@@ -70,6 +73,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
           `};
     }
     
+    //Function to show the amount field box once the checkbox for the item is selected
     function toggleQuantityField(checkbox, itemno, price) {
           const quantityField = document.getElementById('quantity' + itemno);
           if (checkbox.checked) {
@@ -86,7 +90,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     .then(response => response.json())
     .then(data => {
           const menuItems = data.items;
-          const grpitems = menuItems.filter(item => item.group === menu && item.status === true);
+          const grpitems = menuItems.filter(item => item.group === menugrp && item.status === true);
           const container = document.getElementById('menuItemsForm');
           if (container) {
                 grpitems.forEach(menuItem => {

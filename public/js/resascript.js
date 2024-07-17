@@ -63,6 +63,10 @@ let username = localStorage.getItem('username');
                   let total = 0;
                   const today = new Date();
                   today.setHours(0, 0, 0, 0);
+
+                  // Sort the reservations by date
+                  resasDetails.sort((a, b) => new Date(a.date) - new Date(b.date));
+
                   for (const resas of resasDetails) {
                         // Parse the reservation date
                         const resasDate = new Date(resas.date);
@@ -74,6 +78,21 @@ let username = localStorage.getItem('username');
                               total += reservationTotal; // Add to the overall total
                               // Create a row for reservation details
                               const resasRow = document.createElement('tr');
+                              const resasRowHdr = document.createElement('tr');
+                              resasRowHdr.classList.add('bold-row');
+                              resasRow.classList.add('bold-row');
+                              resasRowHdr.innerHTML = `
+                              <th scope="col">Date</th>
+                              <th scope="col">Time</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Email</th>
+                              <th scope="col">Phone No.</th>
+                              <th scope="col">Pax</th>
+                              <th scope="col">Other</th>
+                              <th scope="col">Takeout</th>
+                              <th scope="col">Order Total</th>
+                              `;
+                              resasTableBody.appendChild(resasRowHdr);
                               resasRow.innerHTML = `
                               <td>${resas.date ? formatDate(resas.date) : 'Date not available'}</td>
                               <td>${resas.time || 'Time not available'}</td>
@@ -94,7 +113,7 @@ let username = localStorage.getItem('username');
                                     const ordersList = document.createElement('ul');
                                     // Create a table element
                                     const ordersTable = document.createElement('table');
-                                    ordersTable.classList.add('orders-table');
+                                    ordersTable.classList.add('orders-table', 'indented-orders');
                                     // Create the header row
                                     const headerRow = ordersTable.insertRow();
                                     const headers = ['Item Name', 'Quantity Ordered', 'Price Each', 'Line Total'];
