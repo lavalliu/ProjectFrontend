@@ -96,16 +96,21 @@ const checkboxes = document.querySelectorAll('.cancel-checkbox:checked');
 const updates = [];
 checkboxes.forEach(checkbox => {
 const row = checkbox.closest('tr');
-if (row) { // Ensure row is defined
-const reservationId = row.dataset.reservationId; // Use the reservation ID from the data attribute
-if (reservationId) { // Ensure reservationId is defined
-updates.push(updateReservationStatus(reservationId, false));
+if (row) {
+const reservationId = row.dataset.reservationId;
+if (reservationId) {
+const status = false; // Assuming you want to set status to false
+
+console.log('Updating reservation status:', reservationId, status);
+
+updates.push(updateReservationStatus(reservationId, { status: status }));
 }
 }
 });
 await Promise.all(updates);
 displayAllResasNoParam();
 });
+
 
 });
 
@@ -171,49 +176,26 @@ for (const resas of filteredReservations) {
 const reservationTotal = resas.orders.reduce((sum, order) => sum + (order.quantity * order.price), 0);
 total += reservationTotal;
 const formattedDate = new Date(resas.date).toLocaleDateString('en-UK');
-// Create a row for reservation header and details
+
 const resasRow = document.createElement('tr');
-const resasRowHdr = document.createElement('tr');
 resasRow.dataset.reservationId = resas._id;
-resasRowHdr.classList.add('bold-row');
 resasRow.classList.add('bold-row');
-resasRowHdr.innerHTML = `
-<th scope="col">Username</th>
-<th scope="col">Date</th>
-<th scope="col">Time</th>
-<th scope="col">Name</th>
-<th scope="col">Email</th>
-<th scope="col">Phone No.</th>
-<th scope="col">Pax</th>
-<th scope="col">Other</th>
-<th scope="col">Take Away</th>
-<th scope="col">Order Total</th>
-<th scope="col">Cancel</th>
-`;
-resasTableBody.appendChild(resasRowHdr);
 resasRow.innerHTML = `
-<td>${resas._id}</td>
-<td>${resas.username}</td>
-<td>${formattedDate}</td>
-<td>${resas.time}</td>
-<td>${resas.fname} ${resas.lname}</td>
-<td>${resas.email}</td>
-<td>${resas.phoneno}</td>
-<td>${resas.pax}</td>
-<td>${resas.other}</td>
-<td>${resas.takeout ? 'Yes' : 'No'}</td>
+<td class="username">${resas.username}</td>
+<td class="date">${formattedDate}</td>
+<td class="time">${resas.time}</td>
+<td class="fname">${resas.fname}</td>
+<td class="lname">${resas.lname}</td>
+<td class="email">${resas.email}</td>
+<td class="phoneno">${resas.phoneno}</td>
+<td class="pax">${resas.pax}</td>
+<td class="other">${resas.other}</td>
+<td class="takeout">${resas.takeout ? 'Yes' : 'No'}</td>
 <td>Rs${reservationTotal.toFixed(2)}</td>
+<td><input type="checkbox" class="cancel-checkbox" ${!resas.status ? 'checked' : ''}></td>
 `;
 resasTableBody.appendChild(resasRow);
 
-const cancelCheckboxCell = document.createElement('td');
-const cancelCheckbox = document.createElement('input');
-cancelCheckbox.type = 'checkbox';
-cancelCheckbox.className = 'cancel-checkbox';
-cancelCheckbox.checked = !resas.status;
-cancelCheckboxCell.appendChild(cancelCheckbox);
-resasRow.appendChild(cancelCheckboxCell);
-resasTableBody.appendChild(resasRow);
 
 // Create a row for orders if there are any
 if (resas.orders.length > 0) {
@@ -266,22 +248,22 @@ console.error('Failed to fetch reservations:', error);
 }
 }
 
-async function updateReservationStatus(reservationId, status) {
+async function updateReservationStatus(reservationId, data) {
 try {
 const response = await fetch(`https://projectbackend-fndm.onrender.com/reservations/${reservationId}`, {
-method: 'PUT',
+method: 'PATCH', // Use PATCH for partial updates
 headers: {
 'Content-Type': 'application/json'
 },
-body: JSON.stringify({ status: status })
+body: JSON.stringify(data)
 });
 
 if (!response.ok) {
 throw new Error('Failed to update reservation status');
 }
 
-const data = await response.json();
-console.log('Reservation status updated:', data);
+const responseData = await response.json();
+console.log('Reservation status updated:', responseData);
 } catch (error) {
 console.error('Error updating reservation status:', error);
 }
