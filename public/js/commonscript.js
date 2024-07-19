@@ -1,6 +1,3 @@
-// import { backendUrl } from '/main'; 
-// console.log(backendUrl);
-
 //Function to move in between the menu group screen
 function menuSlides(menugrp) {
     window.location.href = `/${menugrp}`;
@@ -52,8 +49,6 @@ function displayWelcomeMessageAndHandleLogout() {
 
 // Attach the logout function to logout
 document.getElementById('logout').addEventListener('click', logout);
-
-const uri = `${process.env.MONGO_DB_URI}`;
 
 // Function to fetch item details by item number
 async function fetchItemDetails(itemNo) {

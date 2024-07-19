@@ -1,10 +1,12 @@
 const express = require("express");
+require('dotenv').config();
 const fastify = require('fastify')({ logger: true });
 const path = require('path');
 const app = express();
 const bodyParser = require("body-parser");
-require('dotenv').config();
 const bcrypt = require('bcryptjs');
+
+console.log('process.env.BACKEND_URL');
 
 app.use(bodyParser.json()); // parse requests of content-type - application/json
 app.use(bodyParser.urlencoded({ extended: true })); // parse requests of content-type - application/x-www-form-urlencoded
