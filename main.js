@@ -1,27 +1,16 @@
 const express = require("express");
 const fastify = require('fastify')({ logger: true });
-const path = require('path'); // hint from Akash :) 
+const path = require('path');
 const app = express();
 const bodyParser = require("body-parser");
-// require('dotenv').config({ path: 'project.env' });
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
-
-// const PORT = process.env.PORT || 3000;
-
-// const backendUrl = process.env.BACKEND_URL;
-// const emailAddress = process.env.EMAIL_ADDRESS;
-
-// module.exports = {backendUrl};
 
 app.use(bodyParser.json()); // parse requests of content-type - application/json
 app.use(bodyParser.urlencoded({ extended: true })); // parse requests of content-type - application/x-www-form-urlencoded
-
 app.use(express.static('public'));
-
 app.set('views', path.join(__dirname, '/public/views'));
-
 app.set("view engine", "ejs");
-
 app.use('/images',express.static(path.join(__dirname, 'public/images')));
 app.use('/js',express.static(path.join(__dirname, 'public/js')));
 app.use('/css',express.static(path.join(__dirname, 'public/css')));
