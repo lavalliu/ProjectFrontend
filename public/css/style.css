@@ -232,14 +232,22 @@ h4 {
     font-weight: bold;
 }
 .btn, .btnnoclick {
-    background-color: rgb(11,158,208); 
     color: white;
     border-radius: 5px;
     border: 1px solid rgb(11,158,208);
 }
-.btn:hover {
-    background-color: rgb(11,158,208);
+.btn {
+    background-color: rgb(199, 63, 63);
+    border: 1px solid rgb(199, 63, 63);
+}
+.btnnoclick {
+    padding: 10px;
+    background-color: rgb(11,158,208); 
     border: 1px solid rgb(11,158,208);
+}
+.btn:hover {
+    background-color: rgb(199, 63, 63);
+    border: 1px solid rgb(199, 63, 63);
 }
 .form-group {
     font-size: 15px;
@@ -398,11 +406,11 @@ h4 {
     line-height: 20px; 
     border-radius: 50%; 
     text-align: center;
-    background-color: red; 
+    background-color: rgb(199, 63, 63);
     color: #ffffff; 
 }
 .cartamount:hover {
-    background-color: red;
+    background-color: rgb(199, 63, 63);
 }
 .tbody:nth-child(1) {
     font-weight: bold;

@@ -53,10 +53,12 @@ function displayWelcomeMessageAndHandleLogout() {
 // Attach the logout function to logout
 document.getElementById('logout').addEventListener('click', logout);
 
+const uri = `${process.env.MONGO_DB_URI}`;
+
 // Function to fetch item details by item number
 async function fetchItemDetails(itemNo) {
     try {
-            const response = await fetch(`https://projectbackend-fndm.onrender.com/items/${itemNo}`);
+            const response = await fetch(`${process.env.BACKEND_URL}/items/${itemNo}`);
             const itemData = await response.json();
             return itemData.customer.itemname; 
     } catch (error) {
@@ -169,7 +171,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
     
     // Fetch the menu items and populate the menu
-    fetch('https://projectbackend-fndm.onrender.com/items')
+    fetch(`${process.env.BACKEND_URL}/items`)
     .then(response => response.json())
     .then(data => {
           const menuItems = data.items;
